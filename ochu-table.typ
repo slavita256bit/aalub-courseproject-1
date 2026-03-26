@@ -70,15 +70,15 @@
     #let ochu-vars-lines = (
         (side: "left",   start: 2, span: 2, label: $x_1$),
         (side: "right",  start: 1, span: 2, label: $x_2$),
-        (side: "bottom", start: 4, span: 4, label: $y_1$),
-        (side: "top",    start: 2, span: 4, label: $y_2$),
+        (side: "top",    start: 4, span: 4, label: $y_1$),
+        (side: "bottom", start: 2, span: 4, label: $y_2$),
         // h разорван на две части, поэтому рисуем две линии снизу с бОльшим отступом
         (side: "bottom", start: 1, span: 2, label: $h$, offset: 2.8em),
         (side: "bottom", start: 5, span: 2, label: $h$, offset: 2.8em),
     )
 
     // P1 ==========================================
-    #let veitch-grid-p1 = tt-to-veitch(
+    #let map-p1 = tt-to-veitch(
         encoded-ochu,
         (0, 1, 2, 3, 4),
         5, // Колонка P1
@@ -88,25 +88,31 @@
     )
 
     #align(center)[
+        #let groups = (
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+        )
+
         #veitch-map(
             cell-size: 2.2em,
-            hide: "0",
-            grid-data: veitch-grid-p1,
+            hide: "1",
+            grid-data: map-p1,
             vars: ochu-vars-lines,
-            groups: (
-                (r: 0, c: 0, w: 4, h: 4, pad: 2pt, color: black),
-                (r: 0, c: 2, w: 4, h: 4, pad: 8pt, color: black),
-                (r: 0, c: 5, w: 2, h: 4, pad: 2pt, color: black),
-                (r: 0, c: 0, w: 8, h: 1, pad: 6pt, color: black, dash: "dashed"),
-                (r: 2, c: 0, w: 8, h: 1, pad: 6pt, color: black, dash: "dashed"),
-            )
+            groups: groups
         )
+
+        #h(10em)
+
+        $ P_1 = #get-mcnf(
+            groups,
+            ochu-vars-map,
+            ($x_1$, $x_2$, $y_1$, $y_2$, $h$),
+            rows: 4, cols: 8
+        ) $
     ]
 
-    #h(10em)
-
     // P2 ==========================================
-    #let veitch-grid-p2 = tt-to-veitch(
+    #let map-p2 = tt-to-veitch(
         encoded-ochu,
         (0, 1, 2, 3, 4),
         6, // Колонка P2
@@ -116,25 +122,31 @@
     )
 
     #align(center)[
+        #let groups = (
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+        )
+
         #veitch-map(
             cell-size: 2.2em,
-            hide: "0",
-            grid-data: veitch-grid-p2,
+            hide: "1",
+            grid-data: map-p2,
             vars: ochu-vars-lines,
-            groups: (
-                (r: 0, c: 0, w: 4, h: 4, pad: 2pt, color: black),
-                (r: 0, c: 2, w: 4, h: 4, pad: 8pt, color: black),
-                (r: 0, c: 5, w: 2, h: 4, pad: 2pt, color: black),
-                (r: 0, c: 0, w: 8, h: 1, pad: 6pt, color: black, dash: "dashed"),
-                (r: 2, c: 0, w: 8, h: 1, pad: 6pt, color: black, dash: "dashed"),
-            )
+            groups: groups
         )
+
+        #h(10em)
+
+        $ P_2 = #get-mcnf(
+            groups,
+            ochu-vars-map,
+            ($x_1$, $x_2$, $y_1$, $y_2$, $h$),
+            rows: 4, cols: 8
+        ) $
     ]
 
-    #h(10em)
-
     // P3 ==========================================
-    #let veitch-grid-p3 = tt-to-veitch(
+    #let map-p3 = tt-to-veitch(
         encoded-ochu,
         (0, 1, 2, 3, 4),
         7, // Колонка P3
@@ -144,23 +156,32 @@
     )
 
     #align(center)[
+        #let groups = (
+            (r: 0, c: 3, w: 2, h: 4, pad: 6pt, color: black),
+            (r: 0, c: 7, w: 1, h: 4, pad: 6pt, color: black),
+            (r: 2, c: 0, w: 8, h: 2, pad: 3pt, color: black),
+        )
+
         #veitch-map(
             cell-size: 2.2em,
             hide: "0",
-            grid-data: veitch-grid-p3,
+            grid-data: map-p3,
             vars: ochu-vars-lines,
-            groups: (
-                (r: 0, c: 3, w: 2, h: 4, pad: 6pt, color: black),
-                (r: 0, c: 7, w: 1, h: 4, pad: 6pt, color: black),
-                (r: 2, c: 0, w: 8, h: 2, pad: 3pt, color: black),
-            )
+            groups: groups
         )
+
+        #h(10em)
+
+        $ P_3 = #get-mdnf(
+            groups,
+            ochu-vars-map,
+            ($x_1$, $x_2$, $y_1$, $y_2$, $h$),
+            rows: 4, cols: 8
+        ) $
     ]
 
-    #h(10em)
-
     // P4 ==========================================
-    #let veitch-grid-p4 = tt-to-veitch(
+    #let map-p4 = tt-to-veitch(
         encoded-ochu,
         (0, 1, 2, 3, 4),
         8, // Колонка P4
@@ -170,18 +191,29 @@
     )
 
     #align(center)[
+        #let groups = (
+            (r: 0, c: 3, w: 2, h: 4, pad: 4pt, color: black),
+            (r: 1, c: 0, w: 4, h: 2, pad: 4pt, color: black),
+            (r: 1, c: 5, w: 2, h: 2, pad: 4pt, color: black),
+            (r: 2, c: 7, w: 1, h: 2, pad: 4pt, color: black),
+        )
+
         #veitch-map(
             cell-size: 2.2em,
             hide: "0",
-            grid-data: veitch-grid-p4,
+            grid-data: map-p4,
             vars: ochu-vars-lines,
-            groups: (
-                (r: 0, c: 3, w: 2, h: 4, pad: 4pt, color: black),
-                (r: 1, c: 0, w: 4, h: 2, pad: 4pt, color: black),
-                (r: 1, c: 5, w: 2, h: 2, pad: 4pt, color: black),
-                (r: 2, c: 7, w: 1, h: 2, pad: 4pt, color: black),
-            )
+            groups: groups
         )
+
+        #h(10em)
+
+        $ P_4 = #get-mdnf(
+            groups,
+            ochu-vars-map,
+            ($x_1$, $x_2$, $y_1$, $y_2$, $h$),
+            rows: 4, cols: 8
+        ) $
     ]
 
     #body
