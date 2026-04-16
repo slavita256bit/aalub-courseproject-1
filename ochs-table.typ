@@ -42,6 +42,16 @@
         (c: (1, 2, 5, 6))        // p  (чередующиеся столбцы)
     )
 
+    #let ochs-vars-lines = (
+        (side: "left",   start: 2, span: 2, label: $a_1$),
+        (side: "right",  start: 1, span: 2, label: $a_2$),
+        (side: "top",    start: 4, span: 4, label: $b_1$),
+        (side: "bottom", start: 2, span: 4, label: $b_2$),
+        // p разорван на 2 части:
+        (side: "bottom", start: 1, span: 2, label: $p$, offset: 2.8em),
+        (side: "bottom", start: 5, span: 2, label: $p$, offset: 2.8em),
+    )
+
     // П ==============================
     #let map-p = tt-to-karnaugh(
         encoded-ochs,
@@ -55,8 +65,9 @@
     #align(center)[
         #let groups = (
             (r: 1, c: 0, w: 4, h: 1, pad: 4pt, color: black),
-            (r: 1, c: 5, w: 2, h: 1, pad: 4pt, color: black),
+            (r: 1, c: 5, w: 2, h: 1, pad: 8pt, color: black, id: "group1"),
             (r: 3, c: 1, w: 2, h: 1, pad: 4pt, color: black),
+            (r: 1, c: 1, w: 2, h: 1, pad: 8pt, color: black, id: "group1"),
         )
 
         #karnaugh-map(
@@ -114,36 +125,43 @@
     ]
 
     // S2 ==============================
-    #let map-s2 = tt-to-karnaugh(
+    // Используем tt-to-veitch вместо tt-to-karnaugh!
+    #let map-s2 = tt-to-veitch(
         encoded-ochs,
         (0, 1, 2, 3, 4),
         7,
-        gray-cols: gray-code(3),
-        gray-rows: gray-code(2),
-        default-val: "Z", // to detect errors
+        rows: 4, cols: 8,
+        vars-map: map-vars-positions,
+        default-val: "Z",
     )
 
     #align(center)[
         #let groups = (
+            // ⚠️ ВНИМАНИЕ: Координаты (r, c) я оставил старыми.
+            // Тебе 100% придется их поменять, так как на карте Вейча
+            // единицы будут стоять в других ячейках, нежели на Карно!
             (r: 3, c: 1, w: 2, h: 2, pad: 4pt, color: black),
-            (r: 1, c: 7, w: 2, h: 1, pad: 4pt, color: black),
-            (r: 3, c: 0, w: 4, h: 1, pad: 8pt, color: black, dash: "dashed"),
-            (r: 1, c: 4, w: 4, h: 1, pad: 8pt, color: black, dash: "dashed"),
+            (r: 1, c: 7, w: 2, h: 1, pad: 4pt, color: black, id: "2", dash: "dotted"),
+            (r: 1, c: 3, w: 2, h: 1, pad: 6pt, color: black, id: "2", dash: "dotted"),
+            (r: 3, c: 0, w: 4, h: 1, pad: 2pt, color: black, dash: "dashed"),
+            (r: 1, c: 4, w: 4, h: 1, pad: 2pt, color: black),
             (r: 1, c: 3, w: 2, h: 2, pad: 4pt, color: black),
-            (r: 3, c: 5, w: 2, h: 1, pad: 4pt, color: black),
+            (r: 3, c: 5, w: 2, h: 1, pad: 6pt, color: black, id: "1", dash: "dotted"),
+            (r: 3, c: 1, w: 2, h: 1, pad: 6pt, color: black, id: "1", dash: "dotted"),
         )
 
-        #karnaugh-map(
-            x-labels: gray-code(3),
-            y-labels: gray-code(2),
+        // Отрисовка Вейча
+        #veitch-map(
+            cell-size: 2.2em,
             hide: "0",
-            vars-label: ($a_1 a_2$, $b_1 b_2 p$),
-
             grid-data: map-s2,
-
+            vars: ochs-vars-lines,
             groups: groups
         )
 
+        #v(2em)
+
+        // Математика остается прежней, она универсальна!
         $ S_2 = #get-mdnf(
             groups,
             map-vars-positions,

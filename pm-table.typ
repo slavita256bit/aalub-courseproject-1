@@ -57,12 +57,13 @@
     )
 
     #let vars-labels = ($v_1$, $v_2 П_(i-1)$)
+    #let vars-list = ($v_1$, $v_2$, $П_(i-1)$)
 
     // C_out ==========================================
     #draw-map-block(
         encoded-pm, (0, 1, 2), 3,
         gray-code(2), gray-code(1), vars-labels,
-        pm-vars-map, ($v_1$, $v_2$, $П_(i-1)$),
+        pm-vars-map, vars-list,
         (
             (r: 1, c: 0, w: 4, h: 1, pad: 4pt, color: black),
         ),
@@ -73,7 +74,7 @@
     #draw-map-block(
         encoded-pm, (0, 1, 2), 4,
         gray-code(2), gray-code(1), vars-labels,
-        pm-vars-map, ($v_1$, $v_2$, $П_(i-1)$),
+        pm-vars-map, vars-list,
         (
             (r: 1, c: 3, w: 2, h: 1, pad: 6pt, color: black, dash: "dashed"),
             (r: 1, c: 0, w: 2, h: 1, pad: 4pt, color: black),
@@ -81,29 +82,79 @@
         $S$
     )
 
-    // P1 =============================================
-    #draw-map-block(
-        encoded-pm, (0, 1, 2), 5,
-        gray-code(2), gray-code(1), vars-labels,
-        pm-vars-map, ($v_1$, $v_2$, $П_(i-1)$),
-        (
-            (r: 1, c: 0, w: 1, h: 1, pad: 4pt, color: black),
-            (r: 0, c: 2, w: 1, h: 1, pad: 4pt, color: black),
-        ),
-        $P_1$
+    // Где переменные равны 1 (для генератора формул)
+    #let pm-veitch-vars-map = (
+        (c: (2, 3)),       // v1 (правая половина)
+        (c: (1, 2)),       // v2 (центральная половина)
+        (r: (1,)),         // П_{i-1} (нижняя строка)
     )
 
-    // P2 =============================================
-    #draw-map-block(
-        encoded-pm, (0, 1, 2), 6,
-        gray-code(2), gray-code(1), vars-labels,
-        pm-vars-map, ($v_1$, $v_2$, $П_(i-1)$),
-        (
-            (r: 0, c: 1, w: 1, h: 2, pad: 4pt, color: black),
-            (r: 0, c: 3, w: 1, h: 2, pad: 4pt, color: black),
-        ),
-        $P_2$
+    // Как рисовать линии (для самой карты)
+    #let pm-veitch-vars-lines = (
+        (side: "top",    start: 2, span: 2, label: $v_1$),
+        (side: "bottom", start: 1, span: 2, label: $v_2$),
+        (side: "right",  start: 1, span: 1, label: $П_(i-1)$),
     )
+
+    // P1 =============================================
+    #let map-p1 = tt-to-veitch(
+        encoded-pm, (0, 1, 2), 5,
+        rows: 2, cols: 4,
+        vars-map: pm-veitch-vars-map,
+        default-val: "Z",
+    )
+
+    #align(center)[
+        #let groups = (
+            (r: 1, c: 1, w: 1, h: 1, pad: 4pt, color: black),
+            (r: 0, c: 3, w: 1, h: 1, pad: 4pt, color: black),
+        )
+
+        #veitch-map(
+            cell-size: 2.2em,
+            hide: "0",
+            grid-data: map-p1,
+            vars: pm-veitch-vars-lines,
+            groups: groups
+        )
+
+        $ P_1 = #get-mdnf(
+            groups,
+            pm-veitch-vars-map,
+            ($v_1$, $v_2$, $П_(i-1)$),
+            rows: 2, cols: 4
+        ) $
+    ]
+
+    // P2 =============================================
+    #let map-p2 = tt-to-veitch(
+        encoded-pm, (0, 1, 2), 6,
+        rows: 2, cols: 4,
+        vars-map: pm-veitch-vars-map,
+        default-val: "Z",
+    )
+
+    #align(center)[
+        #let groups = (
+            (r: 0, c: 1, w: 2, h: 1, pad: 4pt, color: black),
+            (r: 1, c: 3, w: 2, h: 1, pad: 4pt, color: black),
+        )
+
+        #veitch-map(
+            cell-size: 2.2em,
+            hide: "0",
+            grid-data: map-p2,
+            vars: pm-veitch-vars-lines,
+            groups: groups
+        )
+
+        $ P_2 = #get-mdnf(
+            groups,
+            pm-veitch-vars-map,
+            ($v_1$, $v_2$, $П_(i-1)$),
+            rows: 2, cols: 4
+        ) $
+    ]
 
     #body
 ]

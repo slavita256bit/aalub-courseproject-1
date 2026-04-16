@@ -79,26 +79,30 @@
     )
 
     // P1 ==========================================
-    #let map-p1 = tt-to-veitch(
+    #let map-p1 = tt-to-karnaugh(
         encoded-ochu,
         (0, 1, 2, 3, 4),
         5, // Колонка P1
-        rows: 4, cols: 8,
-        vars-map: ochu-vars-map,
+        gray-cols: gray-code(3),
+        gray-rows: gray-code(2),
         default-val: "Z",
     )
 
     #align(center)[
         #let groups = (
-            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black),
-            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
+            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
+            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
         )
 
-        #veitch-map(
+        #karnaugh-map(
+            x-labels: gray-code(3),
+            y-labels: gray-code(2),
+            vars-label: ($x_1 x_2$, $y_1 y_2 h$),
             cell-size: 2.2em,
-            hide: "1",
+            hide: "1", // Прячем единицы, так как строим МКНФ (по нулям)
             grid-data: map-p1,
-            vars: ochu-vars-lines,
             groups: groups
         )
 
@@ -124,8 +128,10 @@
 
     #align(center)[
         #let groups = (
-            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black),
-            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black),
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
+            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
+            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
         )
 
         #veitch-map(
