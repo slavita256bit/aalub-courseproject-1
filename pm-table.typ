@@ -16,32 +16,30 @@
                 let out = calc.abs(out)
 
                 res.push((
-                    str(input), str(p_in), str(p_out), str(sign), str(out),
+                    str(input), str(p_in), str(sign), str(out),
                     str(input) + " + " + str(p_out)
-                        + " -> " + if sign == 1 {"-"} else {""} + str(out) + " | " + str(p_out)
+                        + " -> " + if sign == 1 {"-"} else {""} + str(out)
                 ))
             }
         }
         res
     }
 
-    #let schema-pm = (code-standart, none, none, none, code-standart, none)
+    #let schema-pm = (code-standart, none, none, code-standart, none)
     #let encoded-pm = encode-tt(raw-pm, schema-pm)
 
     #draw-truth-table(
-        bold-vlines: (0, 3, 7, -1),
+        bold-vlines: (0, 3, 6, -1),
         bold-hlines: (0, 2, -1),
         header_rows: 2,
         headers: (
             table.cell(colspan: 2)[*Мт*],
-            table.cell[*Перенос\ пред.*],
-            table.cell[*Перенос\ след.*],
+            table.cell[*Перенос*],
             table.cell[*Знак*],
             table.cell(colspan: 2)[*$"[Мт]"_п$*],
             table.cell(rowspan: 2)[*Комментарий*],
             strong($v_1$), strong($v_2$),
-            table.cell[*$П_(i-1)$*],
-            table.cell[*$П_i$*],
+            table.cell[*$П$*],
             table.cell[*$S$*],
             strong($P_1$), strong($P_2$),
         ),
@@ -56,28 +54,17 @@
         (r: (1,)),         // c_in (нижняя строка)
     )
 
-    #let vars-labels = ($v_1$, $v_2 П_(i-1)$)
-    #let vars-list = ($v_1$, $v_2$, $П_(i-1)$)
+    #let vars-labels = ($v_1$, $v_2 П$)
+    #let vars-list = ($v_1$, $v_2$, $П$)
 
-    // C_out ==========================================
+    // Знак ==================================
     #draw-map-block(
         encoded-pm, (0, 1, 2), 3,
         gray-code(2), gray-code(1), vars-labels,
         pm-vars-map, vars-list,
         (
-            (r: 1, c: 0, w: 4, h: 1, pad: 4pt, color: black),
-        ),
-        $П_i$
-    )
-
-    // Знак ==================================
-    #draw-map-block(
-        encoded-pm, (0, 1, 2), 4,
-        gray-code(2), gray-code(1), vars-labels,
-        pm-vars-map, vars-list,
-        (
-            (r: 1, c: 3, w: 2, h: 1, pad: 6pt, color: black, dash: "dashed"),
             (r: 1, c: 0, w: 2, h: 1, pad: 4pt, color: black),
+            (r: 1, c: 3, w: 2, h: 1, pad: 7pt, color: black),
         ),
         $S$
     )
@@ -93,12 +80,12 @@
     #let pm-veitch-vars-lines = (
         (side: "top",    start: 2, span: 2, label: $v_1$),
         (side: "bottom", start: 1, span: 2, label: $v_2$),
-        (side: "right",  start: 1, span: 1, label: $П_(i-1)$),
+        (side: "right",  start: 1, span: 1, label: $П$),
     )
 
     // P1 =============================================
     #let map-p1 = tt-to-veitch(
-        encoded-pm, (0, 1, 2), 5,
+        encoded-pm, (0, 1, 2), 4,
         rows: 2, cols: 4,
         vars-map: pm-veitch-vars-map,
         default-val: "Z",
@@ -106,8 +93,8 @@
 
     #align(center)[
         #let groups = (
-            (r: 1, c: 1, w: 1, h: 1, pad: 4pt, color: black),
             (r: 0, c: 3, w: 1, h: 1, pad: 4pt, color: black),
+            (r: 1, c: 1, w: 1, h: 1, pad: 4pt, color: black),
         )
 
         #veitch-map(
@@ -128,7 +115,7 @@
 
     // P2 =============================================
     #let map-p2 = tt-to-veitch(
-        encoded-pm, (0, 1, 2), 6,
+        encoded-pm, (0, 1, 2), 5,
         rows: 2, cols: 4,
         vars-map: pm-veitch-vars-map,
         default-val: "Z",
@@ -151,7 +138,7 @@
         $ P_2 = #get-mdnf(
             groups,
             pm-veitch-vars-map,
-            ($v_1$, $v_2$, $П_(i-1)$),
+            ($v_1$, $v_2$, $П$),
             rows: 2, cols: 4
         ) $
     ]
