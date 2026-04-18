@@ -1,6 +1,5 @@
 #import "dependencies.typ": *
 
-
 #let ochu-mask = (mh, mt, h) => (mt == 3)
 #let raw-ochu = generate-base-ochu(mask-fn: ochu-mask)
 #let schema-ochu = (code-custom, code-standart, none, code-custom, code-custom, none)
