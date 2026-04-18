@@ -1,5 +1,7 @@
 #import "dependencies.typ": *
 
+#set page(width: auto, height: auto, margin: 1cm)
+
 #let ochu-mask = (mh, mt, h) => (mt == 3)
 #let raw-ochu = generate-base-ochu(mask-fn: ochu-mask)
 #let schema-ochu = (code-custom, code-standart, none, code-custom, code-custom, none)
@@ -24,16 +26,16 @@
   ("P", "S1", "S2")
 )
 
-#ochu-file-content <ochu-data>
-
-#ochs-file-content <ochs-data>
-
 #let ochs-rots-content = generate-rots-file-content(
   "OCHU",
   encoded-ochu,
   ("x1", "x2", "y1", "y2", "h"),
   8
 )
+
+#ochu-file-content <ochu-data>
+
+#ochs-file-content <ochs-data>
 
 #ochs-rots-content <rots-data>
 

@@ -1,5 +1,6 @@
 #import "dependencies.typ": *
 
+//todo таблицы на фулл ширину
 #let ochu-table(body) = [
 
     = Таблица истинности ОЧУ
