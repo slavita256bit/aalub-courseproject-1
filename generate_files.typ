@@ -9,8 +9,7 @@
   "OCHU",
   encoded-ochu,
   ("x1", "x2", "y1", "y2", "_h"),
-  ("P1", "P2", "P3", "P4"),
-  5
+  ("P1", "P2", "P3", "P4")
 )
 
 #let ochs-mask = (a, b, p) => (b == 2 or b == 3)
@@ -22,8 +21,7 @@
   "OCHS",
   encoded-ochs,
   ("a1", "a2", "b1", "b2", "_p"),
-  ("P", "S1", "S2"), // Здесь 3 выхода
-  5
+  ("P", "S1", "S2")
 )
 
 #ochu-file-content <ochu-data>
@@ -33,7 +31,7 @@
 #let ochs-rots-content = generate-rots-file-content(
   "OCHU",
   encoded-ochu,
-  5,
+  ("x1", "x2", "y1", "y2", "h"),
   8
 )
 
