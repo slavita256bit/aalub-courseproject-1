@@ -65,9 +65,9 @@
     #align(center)[
         #let groups = (
             (r: 1, c: 0, w: 4, h: 1, pad: 4pt, color: black),
-            (r: 1, c: 5, w: 2, h: 1, pad: 8pt, color: black, id: "group1"),
+            (r: 1, c: 5, w: 2, h: 1, pad: 8pt, color: black, id: 1),
             (r: 3, c: 1, w: 2, h: 1, pad: 4pt, color: black),
-            (r: 1, c: 1, w: 2, h: 1, pad: 8pt, color: black, id: "group1"),
+            (r: 1, c: 1, w: 2, h: 1, pad: 8pt, color: black, id: 1),
         )
 
         #karnaugh-map(
@@ -141,13 +141,13 @@
             // Тебе 100% придется их поменять, так как на карте Вейча
             // единицы будут стоять в других ячейках, нежели на Карно!
             (r: 3, c: 1, w: 2, h: 2, pad: 4pt, color: black),
-            (r: 1, c: 7, w: 2, h: 1, pad: 4pt, color: black, id: "2", dash: "dotted"),
-            (r: 1, c: 3, w: 2, h: 1, pad: 6pt, color: black, id: "2", dash: "dotted"),
+            (r: 1, c: 7, w: 2, h: 1, pad: 4pt, color: black, id: 2, dash: "dotted"),
+            (r: 1, c: 3, w: 2, h: 1, pad: 6pt, color: black, id: 2, dash: "dotted"),
             (r: 3, c: 0, w: 4, h: 1, pad: 2pt, color: black, dash: "dashed"),
             (r: 1, c: 4, w: 4, h: 1, pad: 2pt, color: black),
             (r: 1, c: 3, w: 2, h: 2, pad: 4pt, color: black),
-            (r: 3, c: 5, w: 2, h: 1, pad: 6pt, color: black, id: "1", dash: "dotted"),
-            (r: 3, c: 1, w: 2, h: 1, pad: 6pt, color: black, id: "1", dash: "dotted"),
+            (r: 3, c: 5, w: 2, h: 1, pad: 6pt, color: black, id: 1, dash: "dotted"),
+            (r: 3, c: 1, w: 2, h: 1, pad: 6pt, color: black, id: 1, dash: "dotted"),
         )
 
         // Отрисовка Вейча

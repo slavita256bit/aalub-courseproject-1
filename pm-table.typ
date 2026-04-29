@@ -39,7 +39,7 @@
             table.cell(colspan: 2)[*$"[Мт]"_п$*],
             table.cell(rowspan: 2)[*Комментарий*],
             strong($v_1$), strong($v_2$),
-            table.cell[*$П$*],
+            table.cell[*$p$*],
             table.cell[*$S$*],
             strong($P_1$), strong($P_2$),
         ),
@@ -54,8 +54,8 @@
         (r: (1,)),         // c_in (нижняя строка)
     )
 
-    #let vars-labels = ($v_1$, $v_2 П$)
-    #let vars-list = ($v_1$, $v_2$, $П$)
+    #let vars-labels = ($v_1$, $v_2 p$)
+    #let vars-list = ($v_1$, $v_2$, $p$)
 
     // Знак ==================================
     #draw-map-block(
@@ -73,14 +73,14 @@
     #let pm-veitch-vars-map = (
         (c: (2, 3)),       // v1 (правая половина)
         (c: (1, 2)),       // v2 (центральная половина)
-        (r: (1,)),         // П_{i-1} (нижняя строка)
+        (r: (1,)),
     )
 
     // Как рисовать линии (для самой карты)
     #let pm-veitch-vars-lines = (
         (side: "top",    start: 2, span: 2, label: $v_1$),
         (side: "bottom", start: 1, span: 2, label: $v_2$),
-        (side: "right",  start: 1, span: 1, label: $П$),
+        (side: "right",  start: 1, span: 1, label: $p$),
     )
 
     // P1 =============================================
@@ -108,7 +108,7 @@
         $ P_1 = #get-mdnf(
             groups,
             pm-veitch-vars-map,
-            ($v_1$, $v_2$, $П_(i-1)$),
+            ($v_1$, $v_2$, $p$),
             rows: 2, cols: 4
         ) $
     ]
@@ -138,7 +138,7 @@
         $ P_2 = #get-mdnf(
             groups,
             pm-veitch-vars-map,
-            ($v_1$, $v_2$, $П$),
+            ($v_1$, $v_2$, $p$),
             rows: 2, cols: 4
         ) $
     ]

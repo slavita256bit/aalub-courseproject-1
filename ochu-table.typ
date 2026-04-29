@@ -91,10 +91,10 @@
 
     #align(center)[
         #let groups = (
-            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
-            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
-            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
-            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: 1),
+            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: 1),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: 2),
+            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: 2),
         )
 
         #karnaugh-map(
@@ -129,10 +129,10 @@
 
     #align(center)[
         #let groups = (
-            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
-            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: "1"),
-            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
-            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: "2"),
+            (r: 1, c: 7, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: 1),
+            (r: 1, c: 4, w: 1, h: 1, pad: 2pt, color: black, dash: "dashed", id: 1),
+            (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: 2),
+            (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: 2),
         )
 
         #veitch-map(
@@ -198,12 +198,20 @@
     )
 
     #align(center)[
+//         #let groups = (
+//             (r: 0, c: 3, w: 2, h: 4, pad: 4pt, color: black),
+//             (r: 1, c: 0, w: 4, h: 2, pad: 4pt, color: black),
+//             (r: 1, c: 5, w: 2, h: 2, pad: 4pt, color: black),
+//             (r: 2, c: 7, w: 2, h: 2, pad: 4pt, color: black),
+//             (r: 0, c: 0, w: 1, h: 4, pad: 6pt, color: black, dash: "dashed"),
+//         )
+
         #let groups = (
-            (r: 0, c: 3, w: 2, h: 4, pad: 4pt, color: black),
-            (r: 1, c: 0, w: 4, h: 2, pad: 4pt, color: black),
-            (r: 1, c: 5, w: 2, h: 2, pad: 4pt, color: black),
             (r: 2, c: 7, w: 2, h: 2, pad: 4pt, color: black),
-            (r: 0, c: 0, w: 1, h: 4, pad: 6pt, color: black, dash: "dashed"),
+            (r: 1, c: 0, w: 4, h: 2, pad: 4pt, color: black),
+            (r: 0, c: 0, w: 1, h: 4, pad: 8pt, color: black, dash: "dashed"),
+            (r: 1, c: 1, w: 2, h: 2, pad: 6pt, color: black, id: 1),
+            (r: 1, c: 5, w: 2, h: 2, pad: 6pt, color: black, id: 1),
         )
 
         #veitch-map(
