@@ -6,7 +6,10 @@
     // Определяем, что прятать на карте
     let hide-val = if is-dnf { "0" } else { "1" }
 
-    let map = align(center)[
+    let map = figure(
+        kind: image,
+        caption: [Карта #if is-veitch {"Вейче"} else {"Карно"} для функции #var-name],
+        align(center)[
         #if is-veitch [
             #veitch-map(
                 cell-size: 2.2em,
@@ -15,6 +18,7 @@
                 vars: veitch-vars,
                 groups: groups
             )
+            #v(1em)
         ] else [
             #karnaugh-map(
                 x-labels: gray-code(3),
@@ -27,10 +31,12 @@
             )
         ]
         #v(1em)
-    ]
+    ])
 
     // Генерируем правильную функцию (МДНФ или МКНФ)
-    let fun = align(center)[
+    let fun = unbreakable[
+        #v(0.5em)
+        Минимизировав функцию, получим:
         #if is-dnf [
             $ #var-name = #get-mdnf(
                 groups,
@@ -48,7 +54,8 @@
         ]
     ]
 
-    let basis = align(center)[
+    let basis = unbreakable[
+    В базисе И, НЕ:
         $ #var-name = #generate-or-not-expression(
             groups,
             map-vars,
@@ -76,7 +83,7 @@
     // --- ТАБЛИЦА ---
     let result-table = align(center)[
         #draw-truth-table(
-            repeat-header: false,
+            repeat-header: true,
             caption: [Таблица истинности ОЧУ],
             lbl: <tbl-ochu>,
             bold-vlines: (0, 2, 4, 5, 7, 9, -1),

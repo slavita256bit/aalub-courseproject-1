@@ -15,30 +15,35 @@
 ) = {
     let hide-val = if is-dnf { "0" } else { "1" }
 
-    let map = align(center)[
-        #if is-veitch [
-            #veitch-map(
-                cell-size: 2.2em,
-                hide: hide-val,
-                grid-data: grid-data,
-                vars: veitch-vars,
-                groups: groups
-            )
-        ] else [
-            #karnaugh-map(
-                x-labels: gray-code(calc.log(cols, base: 2)),
-                y-labels: gray-code(calc.log(rows, base: 2)),
-                hide: hide-val,
-                vars-label: ($v_1$, $v_2 p$), // Для ПМ можно кастомизировать или передавать
-                cell-size: 2.2em,
-                grid-data: grid-data,
-                groups: groups
-            )
-        ]
+    let map = figure(
+        kind: image,
+        caption: [Карта #if is-veitch {"Вейче"} else {"Карно"} для функции #var-name],
+        align(center)[
+            #if is-veitch [
+                #veitch-map(
+                    cell-size: 2.2em,
+                    hide: hide-val,
+                    grid-data: grid-data,
+                    vars: veitch-vars,
+                    groups: groups
+                )
+            ] else [
+                #karnaugh-map(
+                    x-labels: gray-code(calc.log(cols, base: 2)),
+                    y-labels: gray-code(calc.log(rows, base: 2)),
+                    hide: hide-val,
+                    vars-label: ($v_1$, $v_2 p$), // Для ПМ можно кастомизировать или передавать
+                    cell-size: 2.2em,
+                    grid-data: grid-data,
+                    groups: groups
+                )
+            ]
         #v(1em)
-    ]
+        ]
+    )
 
-    let fun = align(center)[
+    let fun = [
+        Минимизировав функцию, получим:
         #if is-dnf [
             $ #var-name = #get-mdnf(groups, map-vars, all-vars, rows: rows, cols: cols) $
         ] else [
@@ -46,14 +51,7 @@
         ]
     ]
 
-    let basis = align(center)[
-        $ #var-name = #generate-or-not-expression(
-            groups, map-vars, all-vars,
-            rows: rows, cols: cols, is-dnf: is-dnf
-        ) $
-    ]
-
-    return (map: map, fun: fun, basis: basis)
+    return (map: map, fun: fun)
 }
 
 #let build-pm() = {
@@ -162,7 +160,3 @@
     [ #pm.p1-map.map #pm.p1-map.fun ],
     [ #pm.p2-map.map #pm.p2-map.fun ]
 )
-
-=== Базис И-НЕ
-#pm.p1-map.basis
-#pm.p2-map.basis

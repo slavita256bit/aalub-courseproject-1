@@ -37,6 +37,7 @@
     numbering("1.1", section, n)
   }
 )
+
 #show heading.where(level: 1): it => {
   counter(figure.where(kind: table)).update(0)
   it
@@ -44,10 +45,16 @@
 
 #show math.equation: it => {
   show ".": ","
-  it
+
+  if it.block {
+    pad(y: 0.5em, it)
+  } else {
+    it
+  }
 }
 
 #set math.equation(numbering: none)
+#set par(spacing: 0.8em)
 
 #outline(
   title: [СОДЕРЖАНИЕ],
@@ -57,14 +64,9 @@
 #pagebreak()
 
 #include "00-intro.typ"
-#pagebreak()
-
 #include "01-algorithm.typ"
-#pagebreak()
-
-// Здесь потом подключите остальные главы
-// #include "02-structure.typ"
-// #include "03-functional.typ"
+#include "02-developing-sm.typ"
+#include "03-functional.typ"
 // #include "04-multiplexers.typ"
 // #include "05-evaluation.typ"
 // #include "06-conclusion.typ"

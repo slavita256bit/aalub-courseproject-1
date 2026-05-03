@@ -3,30 +3,38 @@
 // 1. Helper function to generate the map and both expressions
 #let draw-map-and-expr(var-name, grid-data, groups, map-vars, is-veitch: false, veitch-vars: none) = {
     // Вшиваем align(center) прямо в переменную map
-    let map = align(center)[
-        #if is-veitch [
-            #veitch-map(
-                cell-size: 2.2em,
-                hide: "0",
-                grid-data: grid-data,
-                vars: veitch-vars,
-                groups: groups
-            )
-            #v(2em)
-        ] else [
-            #karnaugh-map(
-                x-labels: gray-code(3),
-                y-labels: gray-code(2),
-                hide: "0",
-                vars-label: ($a_1 a_2$, $b_1 b_2 p$),
-                grid-data: grid-data,
-                groups: groups
-            )
+    let map = figure(
+        kind: image,
+        caption: [Карта #if is-veitch {"Вейче"} else {"Карно"} для функции #var-name],
+        align(center)[
+            #if is-veitch [
+                #veitch-map(
+                    cell-size: 2.2em,
+                    hide: "0",
+                    grid-data: grid-data,
+                    vars: veitch-vars,
+                    groups: groups
+                )
+                #v(2em)
+            ] else [
+                #v(1em)
+                #karnaugh-map(
+                    x-labels: gray-code(3),
+                    y-labels: gray-code(2),
+                    hide: "0",
+                    vars-label: ($a_1 a_2$, $b_1 b_2 p$),
+                    grid-data: grid-data,
+                    groups: groups
+                )
+                #v(0.5em)
+            ]
         ]
-    ]
+    )
 
     // Оборачиваем формулы в align(center), чтобы они всегда были по центру
-    let fun = align(center)[
+    let fun = unbreakable[
+        #v(0.5em)
+        Минимизировав функцию, получим:
         $ #var-name = #get-mdnf(
             groups,
             map-vars,
@@ -35,7 +43,8 @@
         ) $
     ]
 
-    let basis = align(center)[
+    let basis = unbreakable[
+        В базисе И-НЕ:
         $ #var-name = #generate-or-not-expression(
             groups,
             map-vars,
@@ -60,7 +69,7 @@
     // --- TABLE COMPONENT ---
     let result-table = align(center)[
         #draw-truth-table(
-            repeat-header: false,
+            repeat-header: true,
             caption: [Таблица истинности ОЧС],
             lbl: <tbl-ochs>,
             column-widths: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 6fr),

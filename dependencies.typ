@@ -1,2 +1,2 @@
-#import "@local/typst-bsuir-core:1.8.27": *
+#import "@local/typst-bsuir-core:1.9.10": *
 #import "codes.typ": *

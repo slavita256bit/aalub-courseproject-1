@@ -18,7 +18,8 @@
   for r in rows-data {
     let (q-int, q-frac, comment, is-ul) = r
 
-    let b-int = q-int.clusters().map(c => code-dict.at(c, default: c)).join("")
+    let first = true
+    let b-int = if q-int == "3." {"1."} else {"0."}
     let b-frac-lines = encode-b4-lines(q-frac, code-dict)
     let binary-content = block(align(right)[#b-frac-lines.join(" ")])
 
@@ -41,10 +42,10 @@
   }
 
   draw-truth-table(
-    repeat-header: false,
+    repeat-header: true,
     caption: [Перемножение мантисс],
     lbl: <tbl-algo>,
-    column-widths: (1.5em, auto, 2em, 15em, 2fr),
+    column-widths: (1.5em, auto, 1.5em, 15em, 2fr),
     bold-vlines: (0, 2, 4, -1),
     bold-hlines: (0, 1, 2, 16,),
     header_rows: 1,
