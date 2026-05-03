@@ -1,4 +1,4 @@
-#import "@preview/cetz:0.5.0"
+    #import "@preview/cetz:0.5.0"
 
 #set page(width: auto, height: auto, margin: 1cm)
 
