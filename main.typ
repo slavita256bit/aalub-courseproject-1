@@ -1,11 +1,10 @@
 #import "dependencies.typ": *
-#import "ochs-table.typ": *
-#import "ochu-table.typ": *
-#import "pm-table.typ": *
 
-#set text(font: "Times New Roman", size: 14pt)
+// Настройки шрифтов и формул
+#set text(font: "Times New Roman", size: 14pt, lang: "ru")
 #show math.equation: set text(font: "STIX Two Math", size: 14pt)
 
+// Настройка ГОСТ-шаблона из вашей библиотеки
 #show: gost.with(
   title-template: custom-title-template.from-module(aalub-course-project-title),
   approver: (name: "В. С. Ермаков"),
@@ -21,9 +20,51 @@
   title-year: "2026",
 )
 
-// #set math.equation(numbering: none)
-//
-// #let ochs = build-ochs()
-// #block[#show: ochs.table]
-// #let ochu = build-ochu()
-// #block[#show: ochu.table]
+#show figure.where(kind: image): set figure(
+  numbering: n => {
+    let section = counter(heading).get().first()
+    numbering("1.1", section, n)
+  }
+)
+#show heading.where(level: 1): it => {
+  counter(figure.where(kind: image)).update(0)
+  it
+}
+
+#show figure.where(kind: table): set figure(
+  numbering: n => {
+    let section = counter(heading).get().first()
+    numbering("1.1", section, n)
+  }
+)
+#show heading.where(level: 1): it => {
+  counter(figure.where(kind: table)).update(0)
+  it
+}
+
+#show math.equation: it => {
+  show ".": ","
+  it
+}
+
+#set math.equation(numbering: none)
+
+#outline(
+  title: [СОДЕРЖАНИЕ],
+  indent: auto,
+  depth: 3
+)
+#pagebreak()
+
+#include "00-intro.typ"
+#pagebreak()
+
+#include "01-algorithm.typ"
+#pagebreak()
+
+// Здесь потом подключите остальные главы
+// #include "02-structure.typ"
+// #include "03-functional.typ"
+// #include "04-multiplexers.typ"
+// #include "05-evaluation.typ"
+// #include "06-conclusion.typ"
