@@ -60,6 +60,9 @@
     // --- TABLE COMPONENT ---
     let result-table = align(center)[
         #draw-truth-table(
+            repeat-header: false,
+            caption: [Таблица истинности ОЧС],
+            lbl: <tbl-ochs>,
             column-widths: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 6fr),
             bold-vlines: (0, 2, 4, 5, 8, -1),
             bold-hlines: (0, 1, -1),

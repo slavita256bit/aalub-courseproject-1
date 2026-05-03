@@ -1,7 +1,7 @@
 #import "dependencies.typ": *
-#import "ochs-table.typ": ochs-table
-#import "ochu-table.typ": ochu-table
-#import "pm-table.typ": pm-table
+#import "ochs-table.typ": *
+#import "ochu-table.typ": *
+#import "pm-table.typ": *
 
 #set text(font: "Times New Roman", size: 14pt)
 #show math.equation: set text(font: "STIX Two Math", size: 14pt)
@@ -21,14 +21,9 @@
   title-year: "2026",
 )
 
-
-#let ochs = build-ochs()
-ochs
-
-// #pagebreak()
+// #set math.equation(numbering: none)
 //
-// #show: ochu-table
-//
-// #pagebreak()
-//
-// #show: pm-table
+// #let ochs = build-ochs()
+// #block[#show: ochs.table]
+// #let ochu = build-ochu()
+// #block[#show: ochu.table]

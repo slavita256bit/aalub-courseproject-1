@@ -76,6 +76,9 @@
     // --- ТАБЛИЦА ---
     let result-table = align(center)[
         #draw-truth-table(
+            repeat-header: false,
+            caption: [Таблица истинности ОЧУ],
+            lbl: <tbl-ochu>,
             bold-vlines: (0, 2, 4, 5, 7, 9, -1),
             bold-hlines: (0, 2, -1),
             column-widths: (1.5em, 1.5em, 1.5em, 1.5em, 2.5em, 3em, 3em, 3em, 3em, auto),
@@ -95,15 +98,6 @@
             ),
             rows: encoded-ochu
         )
-    ]
-
-    // Обертка с заголовками, как было в вашем коде
-    let full-table = block[
-        = Таблица истинности ОЧУ
-        Разряды множимого закодированы: #encoding-as-text(code-custom) \
-        Разряды множителя закодированы: #encoding-as-text(code-standart) \
-        #v(1em)
-        #result-table
     ]
 
     // --- ПРАВИЛА ПЕРЕМЕННЫХ ---
@@ -186,7 +180,7 @@
     // --- ВОЗВРАТ ---
     return (
         data: encoded-ochu,
-        table: full-table,
+        table: result-table,
         replacements: ochu-schematic-replacements,
         p1-map: content-p1,
         p2-map: content-p2,
