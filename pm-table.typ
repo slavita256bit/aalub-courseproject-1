@@ -89,7 +89,7 @@
                 table.cell[*Знак*], table.cell(colspan: 2)[*$"[Мт]"_п$*],
                 table.cell(rowspan: 2)[*Коммент.*],
                 strong($v_1$), strong($v_2$), table.cell[*$p$*],
-                table.cell[*$S$*], strong($P_1$), strong($P_2$),
+                table.cell[*$S$*], strong($"P"_1$), strong($"P"_2$),
             ),
             rows: encoded-pm
         )]
@@ -114,14 +114,14 @@
 
     let map-p1-data = tt-to-veitch(encoded-pm, (0, 1, 2), 4, rows: 2, cols: 4, vars-map: pm-vars-map)
     let content-p1 = draw-map-and-expr(
-        $P_1$, map-p1-data,
+        $"P"_1$, map-p1-data,
         ((r: 0, c: 3, w: 1, h: 1, color: black), (r: 1, c: 1, w: 1, h: 1, color: black)),
         pm-vars-map, pm-vars-list, encoded-pm, 4, 3, is-veitch: true, veitch-vars: pm-veitch-lines, rows: 2, cols: 4
     )
 
     let map-p2-data = tt-to-veitch(encoded-pm, (0, 1, 2), 5, rows: 2, cols: 4, vars-map: pm-vars-map)
     let content-p2 = draw-map-and-expr(
-        $P_2$, map-p2-data,
+        $"P"_2$, map-p2-data,
         ((r: 0, c: 1, w: 2, h: 1, color: black), (r: 1, c: 3, w: 2, h: 1, color: black)),
         pm-vars-map, pm-vars-list, encoded-pm, 5, 3, is-veitch: true, veitch-vars: pm-veitch-lines, rows: 2, cols: 4
     )

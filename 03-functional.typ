@@ -20,6 +20,7 @@
 #ochs.p-map.map
 #ochs.p-map.fun
 #ochs.p-map.basis
+Эффективность минимизации можно оценить отношением числа входов схем, реализующих переключательную функцию до и после минимизации.
 #ochs.p-map.eff
 
 *Минимизация функции $S_1$:*
@@ -33,7 +34,11 @@
 #ochs.s2-map.map
 ]
 #ochs.s2-map.fun
-#ochs.s2-map.basis //todo слишком длинное, не взялит
+#unbreakable[
+  В базисе И-НЕ:
+  $ S_2 &= overline(a_2 + b_1 + overline(p)) + overline(a_1 + overline(a_2) + p) + overline(overline(a_1) + a_2 + b_1) + \
+        &+ overline(a_1 + overline(a_2) + overline(b_1)) + overline(overline(a_2) + overline(b_2) + p) + overline(overline(a_1) + a_2 + overline(p)) $
+]
 #ochs.s2-map.eff
 
 
@@ -54,15 +59,14 @@
 
 Минимизацию переключательных функций проведём с помощью карт Карно и Вейча.
 
-*Минимизация функции $P_1$:*
+*Минимизация функции $"P"_1$:*
 #ochu.p1-map.map
 #ochu.p1-map.fun
 #ochu.p1-map.basis
-Эффективность минимизации можно оценить отношением числа входов схем, реализующих переключательную функцию до и после минимизации.
 #ochu.p1-map.eff
 
 #unbreakable[
-*Минимизация функции $P_2$:*
+*Минимизация функции $"P"_2$:*
 #ochu.p2-map.map
 ]
 #ochu.p2-map.fun
@@ -70,15 +74,17 @@
 #ochu.p2-map.eff
 
 #unbreakable[
-*Минимизация функции $P_3$:*
+*Минимизация функции $"P"_3$:*
 #ochu.p3-map.map
 ]
 #ochu.p3-map.fun
-#ochu.p3-map.basis // todo fix two not
+В базисе И, НЕ:
+$ "P"_3 = overline(y_2 + h) + x_1 $
+
 #ochu.p3-map.eff
 
 #unbreakable[
-*Минимизация функции $P_4$:*
+*Минимизация функции $"P"_4$:*
 #ochu.p4-map.map
 ]
 #ochu.p4-map.fun
@@ -93,7 +99,7 @@
 #let pm = build-pm()
 #pm.table
 
-Минимизация выходных функций $S$, $P_1$ и $P_2$ представлена ниже.
+Минимизация выходных функций $S$, $"P"_1$ и $"P"_2$ представлена ниже.
 
 *Минимизация функции знака $S$:*
 #pm.s-map.map
@@ -101,15 +107,17 @@
 #pm.s-map.eff
 
 #unbreakable[
-*Минимизация функции $P_1$:*
+*Минимизация функции $"P"_1$:*
 #pm.p1-map.map
 ]
 #pm.p1-map.fun
 #pm.p1-map.eff
 
-*Минимизация функции $P_2$:*
+*Минимизация функции $"P"_2$:*
 #pm.p2-map.map
 #pm.p2-map.fun
 #pm.p2-map.eff
 
 //todo перепровить эффективность
+
+//todo вставить роту

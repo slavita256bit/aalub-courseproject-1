@@ -69,6 +69,6 @@
 #include "01-algorithm.typ"
 #include "02-developing-sm.typ"
 #include "03-functional.typ"
-// #include "04-multiplexers.typ"
+#include "04-multiplexers.typ"
 // #include "05-evaluation.typ"
 // #include "06-conclusion.typ"
