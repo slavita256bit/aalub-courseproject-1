@@ -38,13 +38,15 @@
   }
 )
 
+#show figure.where(kind: table): set figure(gap: 0.3em)
+
 #show heading.where(level: 1): it => {
   counter(figure.where(kind: table)).update(0)
   it
 }
 
 #show math.equation: it => {
-  show ".": ","
+//   show ".": ","
 
   if it.block {
     pad(y: 0.5em, it)

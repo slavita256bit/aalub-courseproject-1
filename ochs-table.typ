@@ -1,8 +1,7 @@
 #import "dependencies.typ": *
+#import "efficiency.typ": calc-eff
 
-// 1. Helper function to generate the map and both expressions
-#let draw-map-and-expr(var-name, grid-data, groups, map-vars, is-veitch: false, veitch-vars: none) = {
-    // Вшиваем align(center) прямо в переменную map
+#let draw-map-and-expr(var-name, grid-data, groups, map-vars, tt-data, out-col, V, is-veitch: false, veitch-vars: none, is-dnf: true) = {
     let map = figure(
         kind: image,
         caption: [Карта #if is-veitch {"Вейче"} else {"Карно"} для функции #var-name],
@@ -31,7 +30,6 @@
         ]
     )
 
-    // Оборачиваем формулы в align(center), чтобы они всегда были по центру
     let fun = unbreakable[
         #v(0.5em)
         Минимизировав функцию, получим:
@@ -54,25 +52,24 @@
         ) $
     ]
 
-    return (map: map, fun: fun, basis: basis)
+    let eff = calc-eff(groups, tt-data, out-col, V, is-dnf: is-dnf)
+
+    return (map: map, fun: fun, basis: basis, eff: eff)
 }
 
-
-// 2. The main Constructor
 #let build-ochs() = {
-    // --- DATA GENERATION ---
     let raw-ochs = generate-base-ochs(mask-fn: (a, b, p) => (b == 2 or b == 3))
     let schema-ochs = (code-custom, code-custom, none, none, code-custom, none)
     let encoded-ochs = encode-tt(raw-ochs, schema-ochs)
     let encoded-ochs = sort-tt(encoded-ochs, sort-cols: (0, 1, 2, 3, 4))
 
-    // --- TABLE COMPONENT ---
     let result-table = align(center)[
+        #h(1em)
         #draw-truth-table(
             repeat-header: true,
             caption: [Таблица истинности ОЧС],
             lbl: <tbl-ochs>,
-            column-widths: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 6fr),
+            column-widths: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, auto),
             bold-vlines: (0, 2, 4, 5, 8, -1),
             bold-hlines: (0, 1, -1),
             headers: (
@@ -87,7 +84,6 @@
         )
     ]
 
-    // --- VARIABLE POSITIONS ---
     let map-vars-positions = (
         (r: (2, 3)),             // a1
         (r: (1, 2)),             // a2
@@ -105,40 +101,25 @@
         (side: "bottom", start: 5, span: 2, label: $p$, offset: 2.8em),
     )
 
-    // --- П MAP ---
-    let map-p = tt-to-karnaugh(
-        encoded-ochs, (0, 1, 2, 3, 4), 5,
-        gray-cols: gray-code(3), gray-rows: gray-code(2),
-        default-val: "Z",
-    )
+    let map-p = tt-to-karnaugh(encoded-ochs, (0, 1, 2, 3, 4), 5, gray-cols: gray-code(3), gray-rows: gray-code(2), default-val: "Z")
     let groups-p = (
         (r: 1, c: 0, w: 4, h: 1, pad: 4pt, color: black),
         (r: 1, c: 5, w: 2, h: 1, pad: 8pt, color: black, id: 1),
         (r: 3, c: 1, w: 2, h: 1, pad: 4pt, color: black),
         (r: 1, c: 1, w: 2, h: 1, pad: 8pt, color: black, id: 1),
     )
-    let content-p = draw-map-and-expr($П$, map-p, groups-p, map-vars-positions)
+    let content-p = draw-map-and-expr($П$, map-p, groups-p, map-vars-positions, encoded-ochs, 5, 5)
 
-    // --- S1 MAP ---
-    let map-s1 = tt-to-karnaugh(
-        encoded-ochs, (0, 1, 2, 3, 4), 6,
-        gray-cols: gray-code(3), gray-rows: gray-code(2),
-        default-val: "Z",
-    )
+    let map-s1 = tt-to-karnaugh(encoded-ochs, (0, 1, 2, 3, 4), 6, gray-cols: gray-code(3), gray-rows: gray-code(2), default-val: "Z")
     let groups-s1 = (
         (r: 0, c: 5, w: 2, h: 2, pad: 4pt, color: black),
         (r: 0, c: 7, w: 2, h: 2, pad: 4pt, color: black),
         (r: 2, c: 1, w: 2, h: 2, pad: 4pt, color: black),
         (r: 2, c: 3, w: 2, h: 2, pad: 4pt, color: black),
     )
-    let content-s1 = draw-map-and-expr($S_1$, map-s1, groups-s1, map-vars-positions)
+    let content-s1 = draw-map-and-expr($S_1$, map-s1, groups-s1, map-vars-positions, encoded-ochs, 6, 5)
 
-    // --- S2 MAP ---
-    let map-s2 = tt-to-veitch(
-        encoded-ochs, (0, 1, 2, 3, 4), 7,
-        rows: 4, cols: 8,
-        vars-map: map-vars-positions, default-val: "Z",
-    )
+    let map-s2 = tt-to-veitch(encoded-ochs, (0, 1, 2, 3, 4), 7, rows: 4, cols: 8, vars-map: map-vars-positions, default-val: "Z")
     let groups-s2 = (
         (r: 3, c: 1, w: 2, h: 2, pad: 4pt, color: black),
         (r: 1, c: 7, w: 2, h: 1, pad: 4pt, color: black, id: 2, dash: "dotted"),
@@ -149,9 +130,8 @@
         (r: 3, c: 5, w: 2, h: 1, pad: 6pt, color: black, id: 1, dash: "dotted"),
         (r: 3, c: 1, w: 2, h: 1, pad: 6pt, color: black, id: 1, dash: "dotted"),
     )
-    let content-s2 = draw-map-and-expr($S_2$, map-s2, groups-s2, map-vars-positions, is-veitch: true, veitch-vars: ochs-vars-lines)
+    let content-s2 = draw-map-and-expr($S_2$, map-s2, groups-s2, map-vars-positions, encoded-ochs, 7, 5, is-veitch: true, veitch-vars: ochs-vars-lines)
 
-    // --- RETURN DICTIONARY ---
     return (
         data: encoded-ochs,
         table: result-table,
@@ -160,21 +140,3 @@
         s2-map: content-s2,
     )
 }
-
-
-// ============================================================================
-// DEBUG / PREVIEW SECTION
-// ============================================================================
-
-#let debug-ochs = build-ochs()
-
-// Теперь вызов выглядит максимально лаконично:
-#debug-ochs.table
-
-#debug-ochs.p-map.map
-#debug-ochs.p-map.fun
-#debug-ochs.p-map.basis
-
-#debug-ochs.s1-map.map
-#debug-ochs.s1-map.fun
-#debug-ochs.s1-map.basis
