@@ -19,29 +19,29 @@
 *Минимизация функции $П$:*
 #ochs.p-map.map
 #ochs.p-map.fun
-#ochs.p-map.basis
 Эффективность минимизации можно оценить отношением числа входов схем, реализующих переключательную функцию до и после минимизации.
 #ochs.p-map.eff
+#ochs.p-map.basis
 
 #unbreakable[
 *Минимизация функции $S_1$:*
 #ochs.s1-map.map
 ]
 #ochs.s1-map.fun
-#ochs.s1-map.basis
 #ochs.s1-map.eff
+#ochs.s1-map.basis
 
 #unbreakable[
 *Минимизация функции $S_2$:*
 #ochs.s2-map.map
 ]
 #ochs.s2-map.fun
+#ochs.s2-map.eff
 #unbreakable[
-  В базисе И-НЕ:
+  Запишем в базисе И-НЕ:
   $ S_2 &= overline(a_2 + b_1 + overline(p)) + overline(a_1 + overline(a_2) + p) + overline(overline(a_1) + a_2 + b_1) + \
         &+ overline(a_1 + overline(a_2) + overline(b_1)) + overline(overline(a_2) + overline(b_2) + p) + overline(overline(a_1) + a_2 + overline(p)) $
 ]
-#ochs.s2-map.eff
 
 == Логический синтез одноразрядного четверичного умножителя
 
@@ -63,37 +63,35 @@
 *Минимизация функции $"P"_1$:*
 #ochu.p1-map.map
 #ochu.p1-map.fun
-#ochu.p1-map.basis
 #ochu.p1-map.eff
+#ochu.p1-map.basis
 
 #unbreakable[
 *Минимизация функции $"P"_2$:*
 #ochu.p2-map.map
 ]
 #ochu.p2-map.fun
-#ochu.p2-map.basis
 #ochu.p2-map.eff
+#ochu.p2-map.basis
 
 #unbreakable[
 *Минимизация функции $"P"_3$:*
 #ochu.p3-map.map
 ]
 #ochu.p3-map.fun
-В базисе И, НЕ:
-$ "P"_3 = overline(y_2 + h) + x_1 $
-
 #ochu.p3-map.eff
+Запишем в базисе И, НЕ:
+$ "P"_3 = overline(y_2 + h) + x_1 $
 
 #unbreakable[
 *Минимизация функции $"P"_4$:*
 #ochu.p4-map.map
 ]
 #ochu.p4-map.fun
-#ochu.p4-map.basis
 #ochu.p4-map.eff
+#ochu.p4-map.basis
 
 #include "rots-part.typ"
-
 
 == Логический синтез преобразователя множителя
 
@@ -106,20 +104,20 @@ $ "P"_3 = overline(y_2 + h) + x_1 $
 
 *Минимизация функции знака $S$:*
 #pm.s-map.map
-#pm.s-map.fun
 #pm.s-map.eff
+#pm.s-map.fun
 
 #unbreakable[
 *Минимизация функции $"P"_1$:*
 #pm.p1-map.map
 ]
-#pm.p1-map.fun
 #pm.p1-map.eff
+#pm.p1-map.fun
 
 *Минимизация функции $"P"_2$:*
 #pm.p2-map.map
-#pm.p2-map.fun
 #pm.p2-map.eff
+#pm.p2-map.fun
 
 //todo перепровить эффективность
 

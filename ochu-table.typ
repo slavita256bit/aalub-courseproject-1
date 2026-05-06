@@ -42,7 +42,7 @@
     ]
 
     let basis = unbreakable[
-    В базисе И, НЕ:
+    Запишем в базисе И, НЕ:
         $ #var-name = #generate-or-not-expression(
             groups, map-vars, ($x_1$, $x_2$, $y_1$, $y_2$, $h$), rows: 4, cols: 8, is-dnf: is-dnf
         ) $
