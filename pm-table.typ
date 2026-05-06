@@ -87,7 +87,7 @@
             headers: (
                 table.cell(colspan: 2)[*Мт*], table.cell[*Перенос*],
                 table.cell[*Знак*], table.cell(colspan: 2)[*$"[Мт]"_п$*],
-                table.cell(rowspan: 2)[*Коммент.*],
+                table.cell(rowspan: 2)[*Комментарии*],
                 strong($v_1$), strong($v_2$), table.cell[*$p$*],
                 table.cell[*$S$*], strong($"P"_1$), strong($"P"_2$),
             ),

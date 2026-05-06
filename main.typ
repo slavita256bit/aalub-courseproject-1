@@ -18,6 +18,7 @@
   year: "",
   title-city: "МИНСК",
   title-year: "2026",
+  pagination-align: right
 )
 
 #show figure.where(kind: image): set figure(
@@ -46,7 +47,7 @@
 }
 
 #show math.equation: it => {
-//   show ".": ","
+  show ".": ","
 
   if it.block {
     pad(y: 0.5em, it)
@@ -54,6 +55,23 @@
     it
   }
 }
+
+// #show outline.entry: it => {
+//   show linebreak: [ ]
+//   if state("appendixes", false).at(it.element.location()) {
+//     link(it.element.location(), it.indented(
+//       none,
+//       [Приложение #it.prefix()]
+//         + sym.space
+//         + box(width: 1fr, it.fill)
+//         + sym.space
+//         + sym.wj
+//         + it.page()
+//     ))
+//   } else {
+//     it
+//   }
+// }
 
 #set math.equation(numbering: none)
 #set par(spacing: 0.8em)
@@ -72,3 +90,6 @@
 #include "04-multiplexers.typ"
 // #include "05-evaluation.typ"
 // #include "06-conclusion.typ"
+#include "references.typ"
+#show: appendixes
+#include "07-appendices.typ"
