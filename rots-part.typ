@@ -80,4 +80,4 @@ $ P_(4, "тупик"_1) &= x_1 overline(y_2) overline(h) + x_2 overline(y_1) + o
   P_(4, "тупик"_3) &= x_1 overline(y_2) overline(h) + x_2 y_2 + overline(y_1) overline(y_2) overline(h) + x_2 h \
   P_(4, "тупик"_4) &= x_1 y_1 overline(h) + x_2 y_2 + overline(y_1) overline(y_2) overline(h) + x_2 h $
 
-Функциональную схему ОЧУ построим по первой тупиковой форме.
+Функциональная схема ОЧУ построена по первой тупиковой форме и представлена в ПРИЛОЖЕНИИ @app-ochu-scheme.

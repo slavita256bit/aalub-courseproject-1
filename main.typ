@@ -62,7 +62,7 @@
 #show outline.entry: it => {
   show linebreak: []
   let clean_body = {
-    show "(обязательное) ": ""
+    show "(Обязательное) ": ""
     show "(Необязательное) ": ""
     it.body()
   }
@@ -99,7 +99,7 @@
 #include "02-developing-sm.typ"
 #include "03-functional.typ"
 #include "04-multiplexers.typ"
-// #include "05-evaluation.typ" //todo evo check in 03-functional
+#include "05-evaluation.typ"
 #include "06-conclusion.typ"
 #include "references.typ"
 #show: appendixes
