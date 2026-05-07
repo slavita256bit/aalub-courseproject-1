@@ -19,6 +19,43 @@
     ]
 ]
 
+#appendix-heading("Обязательное")[Функциональная схема ОЧС] <app-ochs-scheme>
+
+#[
+    #show: eskd-scheme.with(
+      title: "Одноразрядный четверичный сумматор.\nСхема электрическая\nфункциональная",
+      doc-code: "ГУИР.6-05-0611-05.114 Э2.1",
+      dev-name: "Ермаков",
+      prov-name: "Луцик",
+      group-name: "ЭВМ, гр. 558301",
+      paper-format: "a3",
+      vertical: false
+    )
+
+    #align(center + horizon)[
+        #include "ochs-scheme.typ"
+    ]
+]
+
+#appendix-heading("Обязательное")[Функциональная схема ОЧУ] <app-ochu-scheme>
+
+#[
+    #show: eskd-scheme.with(
+      title: "Одноразрядный четверичный умножитель.\nСхема электрическая\nфункциональная",
+      doc-code: "ГУИР.6-05-0611-05.114 Э2.1",
+      dev-name: "Ермаков",
+      prov-name: "Луцик",
+      group-name: "ЭВМ, гр. 558301",
+      paper-format: "a3",
+      vertical: false
+    )
+
+    #align(center + horizon)[
+        #include "ochu-scheme.typ"
+    ]
+]
+
+
 #appendix-heading("Необязательное")[Операция $C_0 * C_0$] <app-roth-c0>
 
 В данном приложении представлена таблица поиска простых импликант первого этапа алгоритма Рота.
@@ -39,3 +76,22 @@
 
 #let csv-c2 = csv("generated_files/rots/_ci*ci_02__2026_05_04__09_48_46.csv")
 #render-split-roth-table(csv-c2, [Результат операции $C_2 * C_2$], <tbl-app-c2>, chunks: 2, cell-padding: 0.3em, overlap-cols: 1)
+
+#appendix-heading("Обязательное")[Функциональная схема ПМ] <app-pm-scheme>
+
+#[
+    #show: eskd-scheme.with(
+      title: "Преобразователь множителя.\nСхема электрическая\nфункциональная",
+      doc-code: "БГУИР.6-05-0611-05.114 Э2.3",
+      dev-name: "Ермаков",
+      prov-name: "Луцик",
+      group-name: "ЭВМ, гр. 558301",
+      paper-format: "a4",
+      vertical: true
+    )
+
+    #align(center + horizon)[
+      #include "pm-scheme.typ"
+    ]
+]
+

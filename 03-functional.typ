@@ -38,7 +38,7 @@
 #ochs.s2-map.fun
 #ochs.s2-map.eff
 #unbreakable[
-  Запишем в базисе И-НЕ:
+  Запишем в базисе НЕ-ИЛИ:
   $ S_2 &= overline(a_2 + b_1 + overline(p)) + overline(a_1 + overline(a_2) + p) + overline(overline(a_1) + a_2 + b_1) + \
         &+ overline(a_1 + overline(a_2) + overline(b_1)) + overline(overline(a_2) + overline(b_2) + p) + overline(overline(a_1) + a_2 + overline(p)) $
 ]
@@ -80,7 +80,7 @@
 ]
 #ochu.p3-map.fun
 #ochu.p3-map.eff
-Запишем в базисе И, НЕ:
+Запишем в базисе ИЛИ, НЕ:
 $ P_3 = overline(y_2 + h) + x_1 $
 
 #unbreakable[

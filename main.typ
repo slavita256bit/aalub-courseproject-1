@@ -104,3 +104,5 @@
 #include "references.typ"
 #show: appendixes
 #include "07-appendices.typ"
+
+// todo проставить структурные упоминания в плоложениях

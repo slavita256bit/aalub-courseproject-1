@@ -42,7 +42,7 @@
     ]
 
     let basis = unbreakable[
-        Запишем в базисе И-НЕ:
+        Запишем в базисе НЕ-ИЛИ:
         $ #var-name = #generate-or-not-expression(
             groups,
             map-vars,
