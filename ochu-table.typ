@@ -82,8 +82,8 @@
                 strong($x_1$), strong($x_2$),
                 strong($y_1$), strong($y_2$),
                 strong($h$),
-                strong($"P"_1$), strong($"P"_2$),
-                strong($"P"_3$), strong($"P"_4$),
+                strong($P_1$), strong($P_2$),
+                strong($P_3$), strong($P_4$),
             ),
             rows: encoded-ochu
         )
@@ -109,7 +109,7 @@
         (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: 2),
         (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: 2),
     )
-    let content-p1 = draw-map-and-expr($"P"_1$, map-p1-data, groups-p1, ochu-vars-map, encoded-ochu, 5, 5, is-dnf: false)
+    let content-p1 = draw-map-and-expr($P_1$, map-p1-data, groups-p1, ochu-vars-map, encoded-ochu, 5, 5, is-dnf: false)
 
     let map-p2-data = tt-to-veitch(encoded-ochu, (0, 1, 2, 3, 4), 6, rows: 4, cols: 8, vars-map: ochu-vars-map, default-val: "Z")
     let groups-p2 = (
@@ -118,14 +118,14 @@
         (r: 3, c: 7, w: 1, h: 1, pad: 2pt, color: black, id: 2),
         (r: 3, c: 4, w: 1, h: 1, pad: 2pt, color: black, id: 2),
     )
-    let content-p2 = draw-map-and-expr($"P"_2$, map-p2-data, groups-p2, ochu-vars-map, encoded-ochu, 6, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: false)
+    let content-p2 = draw-map-and-expr($P_2$, map-p2-data, groups-p2, ochu-vars-map, encoded-ochu, 6, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: false)
 
     let map-p3-data = tt-to-veitch(encoded-ochu, (0, 1, 2, 3, 4), 7, rows: 4, cols: 8, vars-map: ochu-vars-map, default-val: "Z")
     let groups-p3 = (
         (r: 0, c: 7, w: 2, h: 4, pad: 6pt, color: black),
         (r: 2, c: 0, w: 8, h: 2, pad: 3pt, color: black),
     )
-    let content-p3 = draw-map-and-expr($"P"_3$, map-p3-data, groups-p3, ochu-vars-map, encoded-ochu, 7, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: true)
+    let content-p3 = draw-map-and-expr($P_3$, map-p3-data, groups-p3, ochu-vars-map, encoded-ochu, 7, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: true)
 
     let map-p4-data = tt-to-veitch(encoded-ochu, (0, 1, 2, 3, 4), 8, rows: 4, cols: 8, vars-map: ochu-vars-map, default-val: "Z")
     let groups-p4 = (
@@ -135,7 +135,7 @@
         (r: 1, c: 1, w: 2, h: 2, pad: 6pt, color: black, id: 1),
         (r: 1, c: 5, w: 2, h: 2, pad: 6pt, color: black, id: 1),
     )
-    let content-p4 = draw-map-and-expr($"P"_4$, map-p4-data, groups-p4, ochu-vars-map, encoded-ochu, 8, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: true)
+    let content-p4 = draw-map-and-expr($P_4$, map-p4-data, groups-p4, ochu-vars-map, encoded-ochu, 8, 5, is-veitch: true, veitch-vars: ochu-vars-lines, is-dnf: true)
 
     return (
         data: encoded-ochu, table: result-table,
