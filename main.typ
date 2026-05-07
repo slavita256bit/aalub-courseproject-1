@@ -88,8 +88,8 @@
 #include "02-developing-sm.typ"
 #include "03-functional.typ"
 #include "04-multiplexers.typ"
-// #include "05-evaluation.typ"
-// #include "06-conclusion.typ"
+// #include "05-evaluation.typ" //todo evo check in 03-functional
+#include "06-conclusion.typ"
 #include "references.typ"
 #show: appendixes
 #include "07-appendices.typ"

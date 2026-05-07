@@ -18,6 +18,7 @@
             )
             #v(1em)
         ] else [
+            #v(1em)
             #karnaugh-map(
                 x-labels: gray-code(3),
                 y-labels: gray-code(2),
