@@ -33,7 +33,7 @@
     )
 
     #align(center + horizon)[
-        #include "ochs-scheme.typ"
+        #move(dy: 2cm, [#include "ochs-scheme.typ"])
     ]
 ]
 

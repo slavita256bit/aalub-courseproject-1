@@ -67,7 +67,8 @@
         ochs-bus,
         (func-P, func-S1),
         logic-basis: "A7", bus-basis: "A7", layout: my-layout,
-        draw-inputs: true
+        draw-inputs: true,
+        bus-end-y-override: -20
       )
     })
 

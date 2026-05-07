@@ -27,9 +27,10 @@
     // --- ЛЕВАЯ КОЛОНКА (Входы и P1/P2) ---
     group(name: "col-left", {
       // Рисуем только P1, но передаем все остальные для анализа шины
-      draw-combinational-circuits(ochu-bus, (func-P1,),
+      draw-combinational-circuits(ochu-bus, (func-P1, func-P3,),
         logic-basis: "A5", bus-basis: "A1", layout: my-layout, draw-inputs: true,
-        extra_funcs: (func-P3, func-P4) // <-- ПЕРЕДАЕМ СКРЫТЫЕ ФУНКЦИИ
+        extra_funcs: (func-P4,), // <-- ПЕРЕДАЕМ СКРЫТЫЕ ФУНКЦИИ
+        bus-end-y-override: -13
       )
 
       // Магия: находим выход P1 и делаем разветвление для P2
@@ -43,7 +44,7 @@
     // --- ПРАВАЯ КОЛОНКА (P3 и P4) ---
     group(name: "col-right", {
       translate(x: 13)
-      draw-combinational-circuits(ochu-bus, (func-P3, func-P4),
+      draw-combinational-circuits(ochu-bus, (func-P4,),
         logic-basis: "A5", bus-basis: "A1", layout: my-layout, draw-inputs: false)
     })
 
