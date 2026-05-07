@@ -1,10 +1,10 @@
-    #import "@preview/cetz:0.5.0"
+#import "@preview/cetz:0.5.0"
 
-#set page(width: auto, height: auto, margin: 1cm)
+// #set page(width: auto, height: auto, margin: 1cm)
 
 // Вспомогательная функция для вывода вертикального текста
 #let vert-text(str) = {
-  align(center, par(leading: 0.4em)[#str.clusters().join("\n")])
+  align(center, par(leading: 0.25em)[#str.clusters().join("\n")])
 }
 
 #align(center)[
@@ -151,7 +151,7 @@
     // Входы в регистр множимого (снизу)
     bus((16.0, y_rmg_b - 0.7), (16.0, y_rmg_b)); content((16.0, y_rmg_b - 1), [$D_1$])
     bus((0, y_rmg_b - 0.7), (0, y_rmg_b));   content((0, y_rmg_b - 1), [$D_(m)$])
-    bus((-2.25, y_rmg_b - 0.7), (-2.25, y_rmg_b));   content((-2.25, y_rmg_b - 1), [$D_(m+1)$])
+    wire((-2.25, y_rmg_b - 0.7), (-2.25, y_rmg_b));   content((-2.25, y_rmg_b - 1), [$D_(m+1)$])
 
     bus((0, y_rmg_b + 1.5), (0, y_rmg_b + 2.5));
     bus((16.0, y_rmg_b + 1.5), (16.0, y_rmg_b + 2.5));
@@ -169,7 +169,7 @@
     content((23.2, y_fdk_b + 3.8), [$Q_1$])
 
     // Провода знаковых разрядов (базовые)
-    bus((-2.25, y_rmg_t), (-2.25, y_fdk_b))
+    wire((-2.25, y_rmg_t), (-2.25, y_fdk_b))
 
     // РАЗМНОЖЕНИЕ ЗНАКА (от ФДК в аккумулятор)
     let y_sign_dist = 10.4 // Уровень горизонтальной шины знака

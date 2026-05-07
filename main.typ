@@ -10,7 +10,7 @@
   approver: (name: "В. С. Ермаков"),
   work: (
     topic: "Проектирование и логический синтез\nсумматора-умножителя двоично-четверичных чисел",
-    code: "БГУИР КР 6-05-0611-05 558 ПЗ"
+    code: "БГУИР КР 6-05-0611-05 114 ПЗ"
   ),
   student: (name: "В. С. Ермаков", group: "558301"),
   manager: (name: "Ю. А. Луцик"),
@@ -20,6 +20,9 @@
   title-year: "2026",
   pagination-align: right
 )
+
+#show "<<": "«"
+#show ">>": "»"
 
 #show figure.where(kind: image): set figure(
   numbering: n => {
@@ -56,22 +59,30 @@
   }
 }
 
-// #show outline.entry: it => {
-//   show linebreak: [ ]
-//   if state("appendixes", false).at(it.element.location()) {
-//     link(it.element.location(), it.indented(
-//       none,
-//       [Приложение #it.prefix()]
-//         + sym.space
-//         + box(width: 1fr, it.fill)
-//         + sym.space
-//         + sym.wj
-//         + it.page()
-//     ))
-//   } else {
-//     it
-//   }
-// }
+#show outline.entry: it => {
+  show linebreak: []
+  let clean_body = {
+    show "(обязательное) ": ""
+    show "(Необязательное) ": ""
+    it.body()
+  }
+
+  set block(spacing: 0.65em)
+
+  if state("appendixes", false).at(it.element.location()) {
+    link(it.element.location(), it.indented(
+      none,
+      [ПРИЛОЖЕНИЕ #it.prefix() #clean_body]
+        + sym.space
+        + box(width: 1fr, it.fill)
+        + sym.space
+        + sym.wj
+        + it.page()
+    ))
+  } else {
+    it
+  }
+}
 
 #set math.equation(numbering: none)
 #set par(spacing: 0.8em)
