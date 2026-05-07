@@ -1,6 +1,6 @@
 #import "dependencies.typ": *
 
-#let calc-eff(groups, tt-data, out-col, V, is-dnf: true) = {
+#let calc-eff(groups, tt-data, out-col, V, is-dnf: true, inv: auto) = {
     // 1. Считаем ДО минимизации (N_до)
     let R = 0
     let target = if is-dnf { "1" } else { "0" }
@@ -48,7 +48,7 @@
     }
 
     let outer-gate-val = if term-lengths.len() > 1 { term-lengths.len() } else { 0 }
-    let inverters-val = V
+    let inverters-val = if inv == auto { V } else { inv }
 
     let after-val = terms-inputs-val + outer-gate-val + inverters-val
 

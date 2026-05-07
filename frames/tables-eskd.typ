@@ -344,7 +344,7 @@
 
     // Зона наименования и шифра
     table.cell(x: 5, y: 3, colspan: 1, rowspan: 5)[
-     #set par(leading: 0.4em)
+     #set par(leading: 0.4em, justify: false)
      #text(size: 14pt, title)
     ],
     table.cell(x: 5, y: 0, colspan: 7, rowspan: 3)[#text(size: 20pt, doc-code)],
@@ -360,6 +360,7 @@
     table.cell(x: 11, y: 4, colspan: 1, rowspan: 3)[],
 
     // Зона листов и группы
+    table.cell(x: 5, y: 8, rowspan: 3, colspan: 1)[], // Пустая ячейка, которую объединяем
     table.cell(x: 6, y: 7, colspan: 4, rowspan: 1)[Лист],
     table.cell(x: 10, y: 7, colspan: 2, rowspan: 1)[Листов 1],
     table.cell(x: 6, y: 8, colspan: 6, rowspan: 3)[#text(size: 16pt, group-name)],
@@ -402,12 +403,11 @@
 #let table-schema-top-left(doc-code: "") = {
   rotate(180deg)[
     #table(
-      columns: (70mm, 12mm),
+      columns: (70mm,),
       rows: (14mm,),
       align: center + horizon,
       stroke: thick-table-borders,
-      table.cell(text(font: "GOST Type A", size: 16pt)[#doc-code]),
-      []
+      table.cell(text(font: "GOST Type A", size: 16pt)[#doc-code])
     )
   ]
 }
