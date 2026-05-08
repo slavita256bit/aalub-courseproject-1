@@ -18,7 +18,7 @@
     ("!a1", "a2", "b1", "!p")
   ),
   inv-out: true,
-  z-fracts: (60%, 75%, 60%)
+  z-fracts: (50%, 75%, 50%)
 )
 
 #let func-S1 = (
@@ -44,14 +44,15 @@
     ("!a1", "a2", "!p")
   ),
   inv-out: true,
-  z-fracts: (75%, 60%, 40%, 40%, 40%, 60%)
+  z-fracts: (70%, 50%, 30%, 30%, 50%, 70%)
 )
 
 // Единый layout для обеих колонок
 #let my-layout = (
   LAYER_1_X: 2.0,
+//   LAYER_MID_X: 4.5,
   LAYER_2_X: 6.5,
-  LAYER_OUT_X: 9,
+  LAYER_OUT_X: 11,
   FUNC_Y_SPACING: 1.2
 )
 
@@ -68,7 +69,7 @@
         (func-P, func-S1),
         logic-basis: "A7", bus-basis: "A7", layout: my-layout,
         draw-inputs: true,
-        bus-end-y-override: -20
+        bus-end-y-override: -22
       )
     })
 
@@ -76,7 +77,7 @@
     // ПРАВАЯ КОЛОНКА (Только S2)
     // ==========================================
     group(name: "col-right", {
-      translate(x: 13) // Сдвигаем на 11 см вправо
+      translate(x: 14) // Сдвигаем на 11 см вправо
       draw-combinational-circuits(
         ochs-bus,
         (func-S2,),
@@ -90,6 +91,6 @@
     // ==========================================
     // Левая шина на x=0, правая на x=11.
     // Координата начала шины (bus-start-y) по умолчанию равна 1.0
-    line((0, 1.0), (13, 1.0), stroke: 2pt)
+    line((0, 1.0), (14, 1.0), stroke: 1mm)
   })
 ]

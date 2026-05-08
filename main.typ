@@ -30,10 +30,6 @@
     numbering("1.1", section, n)
   }
 )
-#show heading.where(level: 1): it => {
-  counter(figure.where(kind: image)).update(0)
-  it
-}
 
 #show figure.where(kind: table): set figure(
   numbering: n => {
@@ -46,6 +42,7 @@
 
 #show heading.where(level: 1): it => {
   counter(figure.where(kind: table)).update(0)
+  counter(figure.where(kind: image)).update(0)
   it
 }
 
@@ -63,7 +60,8 @@
   show linebreak: []
   let clean_body = {
     show "(Обязательное) ": ""
-    show "(Необязательное) ": ""
+    show "(Справочное) ": ""
+    show v: []
     it.body()
   }
 
@@ -86,6 +84,15 @@
 
 #set math.equation(numbering: none)
 #set par(spacing: 0.8em)
+
+#show heading: it => {
+  if it.numbering == none {
+    set align(center)
+    it
+  } else {
+    it
+  }
+}
 
 #outline(
   title: [СОДЕРЖАНИЕ],
