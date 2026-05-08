@@ -83,6 +83,38 @@
   )
 
   // Выводим сам контент схемы (шрифт по умолчанию делаем GOST)
-  set text(font: "GOST Type B", size: 12pt)
+  set text(font: "GOST Type A", size: 12pt)
+  body
+}
+
+// ==========================================
+// ОБОЛОЧКА ДЛЯ ВЕДОМОСТИ ДОКУМЕНТОВ
+// ==========================================
+#let eskd-vedomost(
+  title: "",
+  doc-code: "",
+  dev-name: "",
+  prov-name: "",
+  group-name: "",
+  body
+) = context {
+  let main-table = eskd-tables.table-vedomost-stamp(
+    title: title, doc-code: doc-code,
+    dev-name: dev-name, prov-name: prov-name, group-name: group-name
+  )
+
+  set page(
+    width: 210mm,
+    height: 297mm,
+    margin: (left: 25mm, right: 10mm, top: 25mm, bottom: 55mm), // Отступ под штамп
+    header: none,
+    footer: none,
+    background: [
+      #document-frame
+      #place(bottom + right, dx: -5mm, dy: -10mm, main-table)
+    ]
+  )
+
+  set text(font: "Arial", size: 12pt, style: "italic") // Как на картинке
   body
 }

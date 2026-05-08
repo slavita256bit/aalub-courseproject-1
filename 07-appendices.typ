@@ -112,3 +112,6 @@
       #include "ochs-mux-scheme.typ"
     ]
 ]
+
+#appendix-heading("Обязательное")[Ведомость документов] <app-vedomost>
+

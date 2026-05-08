@@ -7,7 +7,7 @@
 // Настройка ГОСТ-шаблона из вашей библиотеки
 #show: gost.with(
   title-template: custom-title-template.from-module(aalub-course-project-title),
-  approver: (name: "В. С. Ермаков"),
+  approver: (name: "Ю. А. Луцик"),
   work: (
     topic: "Проектирование и логический синтез\nсумматора-умножителя двоично-четверичных чисел",
     code: "БГУИР КР 6-05-0611-05 114 ПЗ"
