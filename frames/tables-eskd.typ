@@ -413,13 +413,13 @@
 }
 
 // ==========================================
-// ОСНОВНАЯ НАДПИСЬ ДЛЯ ВЕДОМОСТИ (ФОРМА 2)
+// ОСНОВНАЯ НАДПИСЬ ДЛЯ ВЕДОМОСТИ
 // ==========================================
 #let table-vedomost-stamp(title: "", doc-code: "", dev-name: "", prov-name: "", group-name: "") = {
   show table.cell: set text(font: "GOST Type A", size: 11pt, style: "normal")
 
   table(
-    columns: (7mm, 10mm, 23mm, 15mm, 10mm, 70mm, 15mm, 15mm, 20mm),
+    columns: (7mm, 10mm, 23mm, 15mm, 10mm, 70mm, 5mm, 5mm, 5mm, 15mm, 20mm), // Разбили колонку 15мм на 5+5+5
     rows: (5mm,) * 8, // 8 строк по 5 мм = высота штампа 40 мм
     align: center + horizon,
     stroke: thick-table-borders,
@@ -427,18 +427,20 @@
     // Зона наименования и шифра
     table.cell(x: 5, y: 3, colspan: 1, rowspan: 5)[
      #set par(leading: 0.4em, justify: false)
-     #text(size: 13pt, title)
+     #text(size: 5mm, title)
     ],
-    table.cell(x: 5, y: 0, colspan: 4, rowspan: 3)[#text(size: 18pt, doc-code)],
+    table.cell(x: 5, y: 0, colspan: 6, rowspan: 3)[#text(size: 7mm, doc-code)],
 
     // Зона литер, листов
-    table.cell(x: 6, y: 3, colspan: 1, rowspan: 1)[Лит.],
-    table.cell(x: 6, y: 4, colspan: 1, rowspan: 1)[Т],
-    table.cell(x: 7, y: 3, colspan: 1, rowspan: 1)[Лист],
-    table.cell(x: 7, y: 4, colspan: 1, rowspan: 1)[1],
-    table.cell(x: 8, y: 3, colspan: 1, rowspan: 1)[Листов],
-    table.cell(x: 8, y: 4, colspan: 1, rowspan: 1)[1],
-    table.cell(x: 6, y: 5, colspan: 3, rowspan: 3)[#text(size: 14pt, group-name)],
+    table.cell(x: 6, y: 3, colspan: 3, rowspan: 1)[Лит.],
+    table.cell(x: 6, y: 4, colspan: 1, rowspan: 1)[],
+    table.cell(x: 7, y: 4, colspan: 1, rowspan: 1, stroke: (left: thin-table-borders, right: thin-table-borders, top: thick-table-borders, bottom: thick-table-borders))[Т],
+    table.cell(x: 8, y: 4, colspan: 1, rowspan: 1)[],
+    table.cell(x: 9, y: 3, colspan: 1, rowspan: 1)[Лист],
+    table.cell(x: 9, y: 4, colspan: 1, rowspan: 1)[],
+    table.cell(x: 10, y: 3, colspan: 1, rowspan: 1)[Листов],
+    table.cell(x: 10, y: 4, colspan: 1, rowspan: 1)[1],
+    table.cell(x: 6, y: 5, colspan: 5, rowspan: 3)[#text(size: 16pt, group-name)],
 
     // Левый блок (Разраб, Пров и т.д.)
     table.cell(x: 0, y: 1, rowspan: 1, colspan: 1, align: left + horizon, inset: 0.1mm)[#scale(x: 80%)[Изм.]],
@@ -449,10 +451,10 @@
 
     table.cell(x: 0, y: 2, rowspan: 1, colspan: 2, align: left + horizon)[Разраб.],
     table.cell(x: 0, y: 3, rowspan: 1, colspan: 2, align: left + horizon)[Пров.],
-    table.cell(x: 0, y: 4, rowspan: 1, colspan: 2, align: left + horizon)[Т. контр.],
+    table.cell(x: 0, y: 4, rowspan: 1, colspan: 2, align: left + horizon)[],
     table.cell(x: 0, y: 5, rowspan: 1, colspan: 2, align: left + horizon)[],
-    table.cell(x: 0, y: 6, rowspan: 1, colspan: 2, align: left + horizon)[Н. контр.],
-    table.cell(x: 0, y: 7, rowspan: 1, colspan: 2, align: left + horizon)[Утв.],
+    table.cell(x: 0, y: 6, rowspan: 1, colspan: 2, align: left + horizon)[],
+    table.cell(x: 0, y: 7, rowspan: 1, colspan: 2, align: left + horizon)[],
 
     table.cell(x: 2, y: 2, rowspan: 1, colspan: 1, align: left + horizon)[#dev-name],
     table.cell(x: 2, y: 3, rowspan: 1, colspan: 1, align: left + horizon)[#prov-name],
