@@ -49,6 +49,7 @@
       (func-S, func-P1, func-P2),
       logic-basis: "A1", // Базис И-ИЛИ-НЕ
       bus-basis: "A1",
+      bus-end-y-override: -18,
       layout: (
         LAYER_2_X: 5.0,      // Чуть отодвинем второй слой вправо
         LAYER_OUT_X: 6,    // Сдвинем надписи выходов еще правее

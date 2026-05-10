@@ -80,7 +80,7 @@
     )
 
     #align(center + horizon)[
-        #move(dy: -1em, [#include "ochu-scheme.typ"])
+        #move(dy: 1em, [#include "ochu-scheme.typ"])
     ]
 ]
 
@@ -114,7 +114,7 @@
     )
 
     #align(center + horizon)[
-      #include "pm-scheme.typ"
+      #move(dy: -1em, [#include "pm-scheme.typ"])
     ]
 ]
 
@@ -132,7 +132,7 @@
     )
 
     #align(center + horizon)[
-      #include "ochs-mux-scheme.typ"
+       #move(dy: -2em, [#include "ochs-mux-scheme.typ"])
     ]
 ]
 
