@@ -2,6 +2,8 @@
 
 // #set page(width: auto, height: auto, margin: 1cm)
 
+#show ",": "."
+
 // Вспомогательная функция для вывода вертикального текста
 #let vert-text(str) = {
   align(center, par(leading: 0.25em)[#str.clusters().join("\n")])
@@ -36,34 +38,34 @@
     // ========================================================================
     // 1. ОТРИСОВКА БОЛЬШИХ БЛОКОВ
     // ========================================================================
-    rect((-6.0, y_acc_b), (17.0, y_acc_t), name: "acc", stroke: 1pt, fill: white)
-    line((-4.5, y_acc_b), (-4.5, y_acc_t), stroke: 1pt) // Отделение знакового разряда
-    content((-5.25, (y_acc_b + y_acc_t)/2), [ЗН])
+    // Аккумулятор (расширен влево для корректной маршрутизации переноса)
+    rect((-7.5, y_acc_b), (17.0, y_acc_t), name: "acc", stroke: 1pt, fill: white)
+    line((-6.0, y_acc_b), (-6.0, y_acc_t), stroke: 1pt) // Отделение знакового разряда
+    content((-6.75, (y_acc_b + y_acc_t)/2), [ЗН])
     content((5.5, (y_acc_b + y_acc_t)/2), [*АККУМУЛЯТОР*])
 
-    // Стрелка общего сдвига аккумулятора (Алгоритм В - сдвиг влево)
+    // Стрелка общего сдвига аккумулятора
     wire((14, y_acc_t + 0.5), (2, y_acc_t + 0.5))
 
     // ФДК
-    rect((-3.0, y_fdk_b), (17.0, y_fdk_t), name: "fdk", stroke: 1pt, fill: white)
-    line((-1.5, y_fdk_b), (-1.5, y_fdk_t), stroke: 1pt)
-    content((-2.25, (y_fdk_b + y_fdk_t)/2), [ЗН])
+    rect((-4.5, y_fdk_b), (17.0, y_fdk_t), name: "fdk", stroke: 1pt, fill: white)
+    line((-3.0, y_fdk_b), (-3.0, y_fdk_t), stroke: 1pt)
+    content((-3.75, (y_fdk_b + y_fdk_t)/2), [ЗН])
     content((7.5, (y_fdk_b + y_fdk_t)/2), [*ФДК*])
 
     // Регистр множимого
-    rect((-3.0, y_rmg_b), (17.0, y_rmg_t), name: "rmg", stroke: 1pt, fill: white)
-    line((-1.5, y_rmg_b), (-1.5, y_rmg_t), stroke: 1pt)
-    content((-2.25, (y_rmg_b + y_rmg_t)/2), [ЗН])
+    rect((-4.5, y_rmg_b), (17.0, y_rmg_t), name: "rmg", stroke: 1pt, fill: white)
+    line((-3.0, y_rmg_b), (-3.0, y_rmg_t), stroke: 1pt)
+    content((-3.75, (y_rmg_b + y_rmg_t)/2), [ЗН])
     content((7.5, (y_rmg_b + y_rmg_t)/2), [*РЕГИСТР МНОЖИМОГО*])
 
-    // Регистр множителя (Сдвинут вправо, чтобы провода не пересекались)
+    // Регистр множителя
     rect((21, y_fdk_b + 3), (22.5, y_acc_t), stroke: 1pt, fill: white)
     content((21.75, 7.5), vert-text("МНОЖИТЕЛЯ"))
     content((21.75, 11), vert-text("РЕГИСТР"))
-    // Стрелка сдвига регистра множителя (Вверх, т.к. анализируем старшие биты)
     wire((23.0, y_fdk_b + 4.5), (23.0, y_acc_t - 3))
 
-    // Преобразователь множителя (Сужен, выходы смотрят вправо)
+    // Преобразователь множителя
     rect((24.5, y_ocs_b), (27.5, y_acc_t), stroke: 1pt, fill: white)
     content((26.0, (y_ocs_b + y_acc_t)/2), align(center)[Преобра-\ зователь\ множителя])
 
@@ -71,13 +73,12 @@
     // ========================================================================
     // 2. СВЯЗИ И СИГНАЛЫ ПРЕОБРАЗОВАТЕЛЯ МНОЖИТЕЛЯ
     // ========================================================================
-    // Входы от Регистра Множителя к ПМ (Слева направо)
     let y_q1 = y_acc_t - 0.6; let y_q2 = y_q1 - 0.8; let y_q3 = y_q2 - 0.8
     wire((22.5, y_q1), (24.5, y_q1)); content((23, y_q1 + 0.3), [$Q_n$])
     wire((22.5, y_q2), (24.5, y_q2)); content((23.2, y_q2 + 0.3), [$Q_(n-1)$])
     wire((22.5, y_q3), (24.5, y_q3)); content((23.2, y_q3 + 0.3), [$Q_(n-2)$])
 
-    content((17.5, 3.5), [$F_1$])
+    content((17.7, 3.6), [$F_1$])
 
     wire((27.5, y_q2), (28.75, y_q2), (28.75, 3.25), (17.0, 3.25))
     content((27.8, y_q2 + 0.3), [1])
@@ -86,102 +87,114 @@
     let y_q4 = y_q3 - 0.8
     wire_stealth((27.5, y_q4), (28.3, y_q4)); content((27.8, y_q4 + 0.3), [3])
     dotbig((28.3, y_q4))
-    bus_stealth((28.3, y_q3), (28.3, y_q3), (28.3, y_ctrl), (0.5, y_ctrl))
+    bus_stealth((28.3, y_q3), (28.3, y_ctrl), (0.5, y_ctrl))
 
-    // Сигнал Mul/Sum (h) извне справа
-    wire_stealth((30.5, y_h), (0.0, y_h)) // Линия заканчивается на X=0.0 (последний ОЧУ)
+    wire_stealth((30.5, y_h), (-0.4, y_h))
     content((30.5, y_h + 0.3), [Mul/Sum])
     content((30.5, y_h - 0.3), [0 / 1])
 
 
     // ========================================================================
-    // 3. СЕКЦИИ ОЧУ И ОЧС (в цикле)
+    // 3. СЕКЦИИ ОЧУ И ОЧС
     // ========================================================================
     let ocu_w = 2.2; let ocs_w = 2.2
     let sp = 3.0 // Шаг между секциями
 
     for i in range(6) {
-      let cx = 15.5 - i * sp // Считаем справа налево от X=15.5 до X=3.5
+      let cx = 15.5 - i * sp  // Центр ОЧУ
+      let scx = cx - 1.5      // Центр ОЧС (сдвинут влево наполовину шага)
 
-      // Отрисовка самих квадратиков
+      // Отрисовка блоков
       rect((cx - ocu_w/2, y_ocu_b), (cx + ocu_w/2, y_ocu_t), stroke: 1pt, fill: white)
       content((cx, (y_ocu_b + y_ocu_t)/2), [ОЧУ])
 
-      rect((cx - ocs_w/2, y_ocs_b), (cx + ocs_w/2, y_ocs_t), stroke: 1pt, fill: white)
-      content((cx, (y_ocs_b + y_ocs_t)/2), [ОЧС])
+      rect((scx - ocs_w/2, y_ocs_b), (scx + ocs_w/2, y_ocs_t), stroke: 1pt, fill: white)
+      content((scx, (y_ocs_b + y_ocs_t)/2), [ОЧС])
 
-      // Шины данных (Толстые стрелки вверх)
+      // 2 Входа в ОЧУ из ФДК (Разделенные)
       bus((cx + 0.5, y_fdk_t), (cx + 0.5, y_ocu_b))
-      bus((cx, y_ocu_t), (cx, y_ocs_b))
-      bus((cx, y_ocs_t), (cx, y_acc_b))
+      bus((cx - 0.5, y_fdk_t), (cx - 0.5, y_ocu_b))
 
-      // Тонкие провода управления, уходящие наверх в ОЧУ
+      // Тонкие провода управления в ОЧУ
       bus((cx, y_ctrl), (cx, y_ocu_b))
-      wire((cx - 0.5, y_h), (cx - 0.5, y_ocu_b))
-      content((cx - 0.8, y_ocu_b - 0.3), [$h$])
+      wire((cx - 0.9, y_h), (cx - 0.9, y_ocu_b))
+      content((cx - 1.2, y_ocu_b - 0.3), [$h$])
 
-      // СТАВИМ ТОЧКИ только если это НЕ последний блок (чтобы не было точки на конце линии)
       if i < 5 {
         dotbig((cx, y_ctrl))
-        dot((cx - 0.5, y_h))
+        dot((cx - 0.9, y_h))
       }
+
+      // Выходы из ОЧУ (Левый всегда идёт в правый вход ОЧС)
+      bus((cx - 0.5, y_ocu_t), (cx - 0.5, y_ocs_b))
+
+      if i == 0 {
+        // Младший (правый) выход первого ОЧУ идет сразу в аккумулятор
+        bus((cx + 0.5, y_ocu_t), (cx + 0.5, y_acc_b))
+      } else {
+        // Правый выход остальных ОЧУ идет в левый вход предыдущего ОЧС
+        bus((cx + 0.5, y_ocu_t), (cx + 0.5, y_ocs_b))
+      }
+
+      // Выход каждого ОЧС в аккумулятор
+      bus((scx, y_ocs_t), (scx, y_acc_b))
     }
+
+    // Левый (последний) вход последнего ОЧС подключается к 0
+    let leftmost_left_in_x = 14.0 - 5 * sp - 1.0 // x = -2.0
+    bus((leftmost_left_in_x, y_ocu_t + 0.5), (leftmost_left_in_x, y_ocs_b))
+    content((leftmost_left_in_x, y_ocu_t + 0.2), [0])
 
     // ========================================================================
     // 4. ПЕРЕНОСЫ И МНОГОТОЧИЯ
     // ========================================================================
-    // Цепочка переносов между ОЧС (справа налево)
     for i in range(5) {
-      let cx = 15.5 - i * sp
-      let nx = 15.5 - (i+1) * sp
-      wire((cx - ocs_w/2, (y_ocs_b + y_ocs_t)/2), (nx + ocs_w/2, (y_ocs_b + y_ocs_t)/2))
+      let scx = 14.0 - i * sp
+      let nx = 14.0 - (i+1) * sp
+      wire((scx - ocs_w/2, (y_ocs_b + y_ocs_t)/2), (nx + ocs_w/2, (y_ocs_b + y_ocs_t)/2))
     }
 
     // Входной перенос "0" в самый правый ОЧС
-    wire((17.5, (y_ocs_b + y_ocs_t)/2), (15.5 + ocs_w/2, (y_ocs_b + y_ocs_t)/2))
-    content((17.8, (y_ocs_b + y_ocs_t)/2), [0])
+    let right_scx = 14.0
+    let y_ocs_mid = (y_ocs_b + y_ocs_t)/2
+    wire((right_scx + 1.6, y_ocs_mid), (right_scx + ocs_w/2, y_ocs_mid))
+    content((right_scx + 1.6, y_ocs_mid + 0.3), [0])
 
-    // ВЫХОДНОЙ ПЕРЕНОС из самого левого ОЧС заводится в аккумулятор
-    let left_cx = 15.5 - 5 * sp // = 3.5
-    wire((left_cx - ocs_w/2, (y_ocs_b + y_ocs_t)/2), (-1, (y_ocs_b + y_ocs_t)/2), (-1, y_acc_b))
+
+    // Выходной перенос из самого левого ОЧС в аккумулятор
+    let left_scx = -1.0
+    let y_ocs_mid = (y_ocs_b + y_ocs_t)/2
+    wire((left_scx - ocs_w/2, y_ocs_mid), (-2.8, y_ocs_mid), (-2.8, y_acc_b))
 
     // ========================================================================
     // 5. ВНЕШНИЕ ВХОДЫ РЕГИСТРОВ И СИГНАЛЫ ЗНАКА
     // ========================================================================
-    // Входы в регистр множимого (снизу)
     bus((16.0, y_rmg_b - 0.7), (16.0, y_rmg_b)); content((16.0, y_rmg_b - 1), [$D_1$])
     bus((0, y_rmg_b - 0.7), (0, y_rmg_b));   content((0, y_rmg_b - 1), [$D_(m)$])
-    wire((-2.25, y_rmg_b - 0.7), (-2.25, y_rmg_b));   content((-2.25, y_rmg_b - 1), [$D_(m+1)$])
+    wire((-3.75, y_rmg_b - 0.7), (-3.75, y_rmg_b)); content((-3.75, y_rmg_b - 1), [$D_(m+1)$])
 
     bus((0, y_rmg_b + 1.5), (0, y_rmg_b + 2.5));
     bus((16.0, y_rmg_b + 1.5), (16.0, y_rmg_b + 2.5));
 
-    // Входы и выходы регистра множителя (Dn, D1 слева, Q1 справа)
-    wire((19.5, y_acc_t - 0.5), (21.0, y_acc_t - 0.5))
-    content((20.2, y_acc_t - 0.2), [$D_n$])
-
+    wire((19.5, y_acc_t - 0.5), (21.0, y_acc_t - 0.5)); content((20.2, y_acc_t - 0.2), [$D_n$])
     content((20.2, y_acc_t - 3.0), vert-text("..."))
+    wire((19.5, y_fdk_b + 3.5), (21.0, y_fdk_b + 3.5)); content((20.2, y_fdk_b + 3.8), [$D_1$])
+    wire((22.5, y_fdk_b + 3.5), (24.0, y_fdk_b + 3.5)); content((23.2, y_fdk_b + 3.8), [$Q_1$])
 
-    wire((19.5, y_fdk_b + 3.5), (21.0, y_fdk_b + 3.5))
-    content((20.2, y_fdk_b + 3.8), [$D_1$])
-
-    wire((22.5, y_fdk_b + 3.5), (24.0, y_fdk_b + 3.5))
-    content((23.2, y_fdk_b + 3.8), [$Q_1$])
-
-    // Провода знаковых разрядов (базовые)
-    wire((-2.25, y_rmg_t), (-2.25, y_fdk_b))
+    // Провода знаковых разрядов
+    wire((-3.75, y_rmg_t), (-3.75, y_fdk_b))
 
     // РАЗМНОЖЕНИЕ ЗНАКА (от ФДК в аккумулятор)
-    let y_sign_dist = 10.4 // Уровень горизонтальной шины знака
-    line((-2.25, y_fdk_t), (-2.25, y_sign_dist))
-    line((-2.25, y_sign_dist), (-5.25, y_sign_dist))
-    dot((-2.25, y_sign_dist))
+    let y_sign_dist = 10.4
+    line((-3.75, y_fdk_t), (-3.75, y_sign_dist))
+    line((-3.75, y_sign_dist), (-6.75, y_sign_dist))
+    dot((-3.75, y_sign_dist))
 
-    wire((-5.25, y_sign_dist), (-5.25, y_acc_b)) // В дальний ЗН аккумулятора
-    wire((-3.75, y_sign_dist), (-3.75, y_acc_b)) // В промежуточный доп. разряд (размноженный знак)
-    wire((-2.25, y_sign_dist), (-2.25, y_acc_b))   // Оригинальный вход ЗН
+    wire((-6.75, y_sign_dist), (-6.75, y_acc_b))
+    wire((-5.25, y_sign_dist), (-5.25, y_acc_b))
+    wire((-3.75, y_sign_dist), (-3.75, y_acc_b))
 
-    content((-3, y_acc_b - 0.3), [$. . .$]) // Многоточие для показа размножения
-    content((7, y_rmg_b - 0.6), [$. . .$]) // Многоточие для показа размножения
+    content((-4.5, y_acc_b - 0.3), [$. . .$])
+    content((7, y_rmg_b - 0.6), [$. . .$])
   })
 ]
