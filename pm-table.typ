@@ -64,7 +64,7 @@
                 let out = calc.abs(out)
                 res.push((
                     str(input), str(p_in), str(sign), str(out),
-                    str(input) + " + " + str(p_out) + " -> " + if sign == 1 {"-"} else {""} + str(out)
+                    str(input) + " + " + str(p_in) + " -> " + if sign == 1 {"-"} else {""} + str(out)
                 ))
             }
         }
